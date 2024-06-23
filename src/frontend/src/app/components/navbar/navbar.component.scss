@@ -1,0 +1,148 @@
+.shopee-top {
+    height: 120px;
+    width: 100%;
+
+    font-family: Helvetica;
+    background-color: aqua;
+}
+
+
+/*---------------------------------------------------*/
+/*-----------------------NAVBAR----------------------*/
+/*---------------------------------------------------*/
+.navbar {
+    height: 35px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    background-color: rgb(76, 20, 38);
+}
+
+.navbar .navbar-wrapper {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: red;
+}
+
+.navbar-wrapper .actions-button a {
+    font-size: 13px;
+    font-weight: 300;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-wrapper .actions-button{
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+
+    background-color: bisque;
+    font-size: 13px;
+    font-weight: 300;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-wrapper .non-auth-acts,
+.navbar-wrapper .auth-acts {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+}
+
+.non-auth-acts .y-space{
+    width: 1.5px;
+    height: 80%;
+    
+    background-color: hsla(0, 0%, 100%, .22);;
+    margin: 0 8px;
+}
+
+.auth-acts .actions-button{
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.navbar-wrapper .auth-acts {
+    height: 100%;
+
+}
+
+/*---------------------------------------------------*/
+/*-----------------HEADER WITH SEARCH----------------*/
+/*---------------------------------------------------*/
+.header-with-search {
+    height: 85px;
+    width: 100%;
+    padding: 0;
+
+    display: flex;
+    justify-content: space-between;
+
+    background-color: rebeccapurple;
+}
+
+.header-with-search .logo-container{
+    height: 100%;
+    width: 200px;
+
+    background-color: aquamarine;
+}
+
+.logo-container img{
+    margin-left: 5px;
+    height: 100%;
+    width: 165px;
+
+    object-fit: cover;
+}
+
+.header-with-search .seacrh-container{
+    height: 100%;   
+    width: 850px;
+    position: relative;
+
+    background-color: aquamarine;
+}
+
+.seacrh-container .search-bar-container{
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    bottom: 24px;
+
+    background-color: red;
+}
+
+.seacrh-container .search-top-suggest{
+    position: absolute;
+    width: 100%;
+    height: 24px;
+    // overflow: hidden;
+
+    bottom: 0;
+    background-color: rgb(93, 0, 255);
+}
+
+.search-top-suggest ul{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-with-search .cart-container {
+    height: 100%;
+    width: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: aquamarine;
+}
