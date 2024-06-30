@@ -1,12 +1,12 @@
 package com.example.demo.services;
 
+import com.example.demo.dtos.UserLoginDTO;
+import com.example.demo.dtos.UserRegisterDTO;
+import com.example.demo.exceptions.DataNotFoundException;
 import com.example.demo.models.users.User;
 import com.example.demo.repositories.UserRepository;
 
-import javax.mail.MessagingException;
-
 public interface IUserService {
-    public User addUser();
-
-//    public void sendEmail(String to, String subject, String text) throws MessagingException;
+    User createUser(UserRegisterDTO userRegisterDTO) throws DataNotFoundException;
+    String login(UserLoginDTO userLoginDTO) throws Exception;
 }

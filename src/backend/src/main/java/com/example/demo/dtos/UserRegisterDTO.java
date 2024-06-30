@@ -1,4 +1,4 @@
-package com.example.demo.DTObjects;
+package com.example.demo.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
@@ -13,9 +13,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserRegisterDTO {
     @NotBlank(message = "Phone number is required")
-    @JsonProperty("phone_number")
     private String phoneNumber;
 
     @NotBlank(message = "Email number is required")
     private String email;
+
+    @NotBlank(message = "Password is required")
+    private String password;
+
+    @Builder.Default
+    private String roleName = "USER";
+
+    private String facebookAccountId;
+
+    private String googleAccountId;
 }

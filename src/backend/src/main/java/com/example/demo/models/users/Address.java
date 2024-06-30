@@ -1,5 +1,6 @@
 package com.example.demo.models.users;
 
+import com.example.demo.models.BaseEntity;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Document(collection = "addresses")
-public class Address {
+public class Address extends BaseEntity {
     @Id
     private String id;
 

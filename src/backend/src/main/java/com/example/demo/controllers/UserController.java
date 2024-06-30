@@ -1,16 +1,17 @@
 package com.example.demo.controllers;
 
-import com.example.demo.DTObjects.UserRegisterDTO;
+import com.example.demo.dtos.UserLoginDTO;
+import com.example.demo.dtos.UserRegisterDTO;
+import com.example.demo.models.users.User;
 import com.example.demo.services.IUserService;
-import com.example.demo.services.tes.EmailService;
-import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -18,28 +19,29 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public class UserController {
     private final IUserService userService;
-    private final EmailService emailService;
 
-    @GetMapping("")
-    public ResponseEntity<String> Test (@RequestBody UserRegisterDTO userDTO) {
-        try {
-        // Validate userDto (you can use Bean Validation annotations like @NotBlank, etc.)
-        // Save user to database (UserService should handle this logic)
-//        User savedUser = userService.saveUser(userDto);
-
-        // Send confirmation email
-        String to = userDTO.getEmail();
-        String subject = "Welcome to Our Application";
-        String text = "Dear " + userDTO.getPhoneNumber() + ",\n\n"
-                + "Thank you for registering with us.";
-
-        emailService.sendEmail(to, subject, text);
-
-        return ResponseEntity.ok("User registered successfully. Confirmation email sent.");
-        } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send email.");
+    @PostMapping("/register")
+    public ResponseEntity<?> createUser(
+            @Valid @RequestBody UserRegisterDTO userRegisterDTO,
+            BindingResult result){
+        try{
+            if(result.hasErrors()){
+                List<String> errorMessages = result.getFieldErrors()
+                        .stream()
+                        .map(FieldError::getDefaultMessage)
+                        .toList();
+                return ResponseEntity.badRequest().body(errorMessages);
+            }
+            User newUser = userService.createUser(userRegisterDTO);
+            return ResponseEntity.ok(newUser);
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@Valid @RequestBody UserLoginDTO userLoginDTO) throws Exception {
+        String token = userService.login(userLoginDTO);
+        return ResponseEntity.ok(token);
+    }
 }

@@ -20,3 +20,7 @@ spring:
 
 api:
   prefix: api/v1
+
+jwt:
+  expiration: 3600
+  secretKey: Nguyen Tan Tai - 2212990
