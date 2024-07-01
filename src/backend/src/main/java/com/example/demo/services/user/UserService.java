@@ -1,9 +1,11 @@
-package com.example.demo.services;
+package com.example.demo.services.user;
 
 import com.example.demo.components.JwtTokenUtil;
 import com.example.demo.dtos.UserLoginDTO;
 import com.example.demo.dtos.UserRegisterDTO;
 import com.example.demo.exceptions.DataNotFoundException;
+import com.example.demo.exceptions.InvalidParamException;
+import com.example.demo.exceptions.PermissionDenyException;
 import com.example.demo.models.users.Role;
 import com.example.demo.models.users.User;
 import com.example.demo.repositories.RoleRepository;
@@ -21,7 +23,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements IUserService{
+public class UserService implements IUserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
@@ -30,7 +32,7 @@ public class UserService implements IUserService{
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public User createUser(UserRegisterDTO userRegisterDTO) throws DataNotFoundException {
+    public User createUser(UserRegisterDTO userRegisterDTO) throws Exception {
         String phoneNumber = userRegisterDTO.getPhoneNumber();
         String email = userRegisterDTO.getEmail();
 
@@ -43,10 +45,14 @@ public class UserService implements IUserService{
                 .orElseThrow(() -> new DataNotFoundException("Role is not found"));
         role.setName(userRegisterDTO.getRoleName().toUpperCase());
 
+        if(role.getName().equals("ADMIN")){
+            throw new PermissionDenyException("You can not create an admin account here. Please contact to hotline");
+        }
+
         User newUser = User.builder()
                 .phoneNumber(phoneNumber)
                 .email(email)
-                .isActive(false)
+                .isActive(true)
                 .role(role)
                 .build();
 
@@ -54,32 +60,30 @@ public class UserService implements IUserService{
             String password = userRegisterDTO.getPassword();
             String encodedPassword = passwordEncoder.encode(password);
 
-            newUser.setPassword(password);
-            newUser.setPasswordHash(encodedPassword);
+            newUser.setOriginalPassword(password);
+            newUser.setPassword(encodedPassword);
         }
 
         return userRepository.save(newUser);
     }
 
+
     @Override
     public String login(UserLoginDTO userLoginDTO) throws Exception {
         Optional<User> optionalUser = userRepository.findByPhoneNumber(userLoginDTO.getPhoneNumber());
-
-        if(optionalUser.isEmpty()){
-            throw new DataNotFoundException("Invalid Phone Number / Password");
+        if (optionalUser.isEmpty()) {
+            throw new DataNotFoundException("Not found");
         }
         User existingUser = optionalUser.get();
 
-        if(userLoginDTO.getGoogleAccountId() == null
-                && userLoginDTO.getFacebookAccountId() == null){
-            if(!passwordEncoder.matches(userLoginDTO.getPassword(), existingUser.getPassword())){
-                throw new BadCredentialsException("wrong phone number or password");
+        if(existingUser.getFacebookAccountId() == null && existingUser.getGoogleAccountId() == null){
+            if (!passwordEncoder.matches(userLoginDTO.getPassword(), existingUser.getPassword())) {
+                throw new BadCredentialsException("WRONG_PHONE_PASSWORD");
             }
         }
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                userLoginDTO.getPhoneNumber(), userLoginDTO.getPassword()
-        );
+                userLoginDTO.getPhoneNumber(), userLoginDTO.getPassword(), existingUser.getAuthorities());
         authenticationManager.authenticate(authenticationToken);
 
         return jwtTokenUtil.generateToken(existingUser);

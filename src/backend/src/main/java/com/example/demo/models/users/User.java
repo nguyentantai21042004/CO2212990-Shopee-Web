@@ -11,10 +11,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -35,9 +38,10 @@ public class User extends BaseEntity implements UserDetails {
     private String userName;
 
     @NotBlank(message = "Password is required")
-    private String password;
+    private String password;            // Hash Password
 
-    private String passwordHash;
+    @NotBlank(message = "Password original is required")
+    private String originalPassword;    // Original Password
 
     @Indexed(unique = true)
     @NotBlank(message = "Phone number is required")
@@ -47,13 +51,19 @@ public class User extends BaseEntity implements UserDetails {
 
     private List<Address> addresses;
 
+
+    private String facebookAccountId;
+
+    private String googleAccountId;
+
     @DBRef
     private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
-        authorityList.add(new SimpleGrantedAuthority("ROLE_" + getRole().getName()));
+        authorityList.add(new SimpleGrantedAuthority("ROLE_" + getRole().getName().toUpperCase()));
+
         return authorityList;
     }
 
@@ -79,6 +89,6 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return isActive;
+        return true;
     }
 }

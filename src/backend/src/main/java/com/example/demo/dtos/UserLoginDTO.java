@@ -14,7 +14,6 @@ public class UserLoginDTO {
     @NotBlank(message = "Password is required")
     private String password;
 
-    private String facebookAccountId;
-
-    private String googleAccountId;
+    @NotBlank(message = "roleName is required")
+    private String roleName;
 }

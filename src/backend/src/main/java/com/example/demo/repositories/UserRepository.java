@@ -10,7 +10,6 @@ import java.util.Optional;
 public interface UserRepository extends MongoRepository<User,String> {
     boolean existsByPhoneNumber(String phoneNumber);
 
-    /* Optional is used to separate 2 separate cases: null and yes */
     Optional<User> findByPhoneNumber(String phoneNumber);
 
     User findByEmail(String email);
