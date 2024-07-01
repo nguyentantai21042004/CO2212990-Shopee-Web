@@ -1,18 +1,22 @@
 package com.example.demo.dtos;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoleDTO {
-    @NotBlank(message = "Role Name is required")
-    private String name;
+public class UserUpdateDTO {
+    private String fullName;
 
-    private String description;
+    private Date dateOfBirth;
+
+    private String facebookAccountId;
+
+    private String googleAccountId;
 }

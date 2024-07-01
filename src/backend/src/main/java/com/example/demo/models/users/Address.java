@@ -23,6 +23,6 @@ public class Address extends BaseEntity {
 
     private String district;
 
-    @NotBlank(message = "city is required")
+    @NotBlank(message = "City is required")
     private String city;
 }

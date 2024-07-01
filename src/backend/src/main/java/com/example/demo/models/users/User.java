@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 
@@ -34,8 +35,8 @@ public class User extends BaseEntity implements UserDetails {
     private String email;
 
     @Indexed(unique = true)
-    @NotBlank(message = "Username is required")
-    private String userName;
+    @NotBlank(message = "FullName is required")
+    private String fullName;
 
     @NotBlank(message = "Password is required")
     private String password;            // Hash Password
@@ -46,6 +47,8 @@ public class User extends BaseEntity implements UserDetails {
     @Indexed(unique = true)
     @NotBlank(message = "Phone number is required")
     private String phoneNumber;
+
+    private Date dateOfBirth;
 
     private boolean isActive;
 
