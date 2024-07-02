@@ -1,0 +1,2 @@
+D:\Workspaces\Shopee-App\src\frontend\src\assets\access_bg.jpg 
+==> For Login, Sigup Background
