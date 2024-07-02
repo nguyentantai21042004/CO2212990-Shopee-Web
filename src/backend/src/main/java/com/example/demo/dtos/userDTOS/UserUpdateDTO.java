@@ -1,11 +1,11 @@
-package com.example.demo.dtos;
+package com.example.demo.dtos.userDTOS;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -14,7 +14,7 @@ import java.util.Date;
 public class UserUpdateDTO {
     private String fullName;
 
-    private Date dateOfBirth;
+    private LocalDateTime dateOfBirth;
 
     private String facebookAccountId;
 

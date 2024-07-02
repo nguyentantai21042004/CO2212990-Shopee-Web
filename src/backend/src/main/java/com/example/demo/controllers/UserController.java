@@ -1,16 +1,24 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dtos.*;
+import com.example.demo.dtos.userDTOS.UserLoginDTO;
+import com.example.demo.dtos.userDTOS.UserRegisterDTO;
+import com.example.demo.dtos.userDTOS.UserResetPasswordDTO;
+import com.example.demo.dtos.userDTOS.UserUpdateDTO;
 import com.example.demo.models.users.Token;
 import com.example.demo.models.users.User;
-import com.example.demo.responses.LoginResponse;
+import com.example.demo.responses.user.LoginResponse;
 import com.example.demo.responses.ResponseObject;
+import com.example.demo.responses.user.UserListResponse;
+import com.example.demo.responses.user.UserResponse;
 import com.example.demo.services.token.ITokenService;
 import com.example.demo.services.user.IUserService;
 import com.example.demo.utils.ValidationUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,8 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @RestController
@@ -28,6 +35,36 @@ import java.util.Objects;
 public class UserController {
     private final IUserService userService;
     private final ITokenService tokenService;
+
+    @GetMapping("")
+    public ResponseEntity<ResponseObject> getAllUser(
+            @RequestParam(defaultValue = "", required = false) String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int limit
+    ) throws Exception {
+        PageRequest pageRequest = PageRequest.of(
+                page, limit,
+                Sort.by("createdAt").ascending()
+        );
+
+        Page<UserResponse> userPage = userService.findAllUser(keyword, pageRequest)
+                .map(UserResponse::fromUser);
+
+        int totalPages = userPage.getTotalPages();
+        List<UserResponse> userResponses = userPage.getContent();
+
+        UserListResponse userListResponse = UserListResponse.builder()
+                .users(userResponses)
+                .totalPage(totalPages)
+                .build();
+
+        return ResponseEntity.ok().body(
+                ResponseObject.builder()
+                        .data(userListResponse)
+                        .message("Get user list successfully")
+                        .status(HttpStatus.OK)
+                        .build());
+    }
 
     @PostMapping("/register")
     public ResponseEntity<ResponseObject> register(
@@ -104,6 +141,7 @@ public class UserController {
                 .refreshToken(jwtToken.getRefreshToken())
                 .tokenType("Bearer")
                 .username(userDetail.getUsername())
+                .userId(userDetail.getId())
                 .roles(userDetail.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
                 .build();
 
@@ -134,41 +172,56 @@ public class UserController {
             @RequestBody UserUpdateDTO userUpdateDTO,
             @RequestHeader("Authorization") String authorizationHeader
     ) throws Exception {
-        String extractedToken = authorizationHeader.substring(7); // Remove "Bearer "
-        User user = userService.getUserDetailsFromToken(extractedToken);
+        try {
+            String extractedToken = authorizationHeader.substring(7); // Remove "Bearer "
+            User user = userService.getUserDetailsFromToken(extractedToken);
 
-        if(!Objects.equals(user.getId(), userId)){
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            if(!Objects.equals(user.getId(), userId)){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
+
+            User updateUser = userService.updateUserDetail(userId, userUpdateDTO);
+            return ResponseEntity.ok().body(ResponseObject.builder()
+                    .message("Update user's detail successfully")
+                    .data(updateUser)
+                    .status(HttpStatus.OK)
+                    .build());
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(ResponseObject.builder()
+                    .message(e.getMessage())
+                    .data(null)
+                    .status(HttpStatus.BAD_REQUEST)
+                    .build());
         }
-
-        User updateUser = userService.updateUserDetail(userId, userUpdateDTO);
-        return ResponseEntity.ok().body(ResponseObject.builder()
-                .message("Update user's detail successfully")
-                .data(updateUser)
-                .status(HttpStatus.OK)
-                .build());
     }
 
-    // FOR USER
     @PutMapping("details/resetPassword/{userId}")
-    public ResponseEntity<ResponseObject> resetPasswordUserDetail(
+    public ResponseEntity<ResponseObject> changePassword(
             @PathVariable String userId,
             @RequestBody UserResetPasswordDTO userResetPasswordDTO,
             @RequestHeader("Authorization") String authorizationHeader
     ) throws Exception {
-        String extractedToken = authorizationHeader.substring(7); // Remove "Bearer "
-        User user = userService.getUserDetailsFromToken(extractedToken);
+        try {
+            String extractedToken = authorizationHeader.substring(7); // Remove "Bearer "
+            User user = userService.getUserDetailsFromToken(extractedToken);
 
-        if(!Objects.equals(user.getId(), userId)){
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            if(!Objects.equals(user.getId(), userId)){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
+
+            User updateUser = userService.resetPassword(userId, userResetPasswordDTO);
+            return ResponseEntity.ok().body(ResponseObject.builder()
+                    .message("Update user's detail PASSWORD successfully")
+                    .data(updateUser)
+                    .status(HttpStatus.OK)
+                    .build());
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(ResponseObject.builder()
+                    .message(e.getMessage())
+                    .data(null)
+                    .status(HttpStatus.BAD_REQUEST)
+                    .build());
         }
-
-        User updateUser = userService.resetPassword(userId, userResetPasswordDTO);
-        return ResponseEntity.ok().body(ResponseObject.builder()
-                .message("Update user's detail PASSWORD successfully")
-                .data(updateUser)
-                .status(HttpStatus.OK)
-                .build());
     }
 
     // FOR USER
@@ -179,4 +232,24 @@ public class UserController {
 //        User user = userService.getUserDetailFromPhoneNumberAndEmail(userForgetPasswordDTO);
 //
 //    }
+
+    @DeleteMapping("details/{userId}")
+    public ResponseEntity<ResponseObject> deleteUserDetail(
+            @PathVariable String userId,
+            @RequestHeader("Authorization") String authorizationHeader
+    ) throws Exception {
+        String extractedToken = authorizationHeader.substring(7); // Remove "Bearer "
+        User user = userService.getUserDetailsFromToken(extractedToken);
+
+        if(!Objects.equals(user.getId(), userId)){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        userService.delete(userId);
+        return ResponseEntity.ok().body(ResponseObject.builder()
+                .message("Delete All User successfully")
+                .data(null)
+                .status(HttpStatus.OK)
+                .build());
+    }
 }

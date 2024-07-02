@@ -1,4 +1,4 @@
-package com.example.demo.responses;
+package com.example.demo.responses.user;
 
 import lombok.*;
 
@@ -15,9 +15,12 @@ public class LoginResponse {
     private String token;
 
     private String refreshToken;
+
     private String tokenType = "Bearer";
 
     private String username;
+
+    private String userId;
 
     private List<String> roles;
 }

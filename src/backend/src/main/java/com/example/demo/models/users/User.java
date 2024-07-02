@@ -12,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -48,7 +49,7 @@ public class User extends BaseEntity implements UserDetails {
     @NotBlank(message = "Phone number is required")
     private String phoneNumber;
 
-    private Date dateOfBirth;
+    private LocalDateTime dateOfBirth;
 
     private boolean isActive;
 

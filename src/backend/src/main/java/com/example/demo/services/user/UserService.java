@@ -1,7 +1,7 @@
 package com.example.demo.services.user;
 
 import com.example.demo.components.JwtTokenUtil;
-import com.example.demo.dtos.*;
+import com.example.demo.dtos.userDTOS.*;
 import com.example.demo.exceptions.DataNotFoundException;
 import com.example.demo.exceptions.ExpiredTokenException;
 import com.example.demo.exceptions.PermissionDenyException;
@@ -15,6 +15,8 @@ import com.example.demo.repositories.UserRepository;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 
 @Service
@@ -37,6 +38,11 @@ public class UserService implements IUserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
+
+    @Override
+    public Page<User> findAllUser(String keyword, Pageable pageable) throws Exception {
+        return userRepository.findAll(keyword, pageable);
+    }
 
     @Transactional
     @Override
@@ -176,5 +182,18 @@ public class UserService implements IUserService {
             tokenRepository.delete(token);
         }
         return userRepository.save(existingUser);
+    }
+
+    @Transactional
+    @Override
+    public void delete(String userId) throws Exception {
+        User existingUser = userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException("User not found"));
+
+        List<Token> userTokens = tokenRepository.findByUser(existingUser);
+        if(!userTokens.isEmpty()){
+            tokenRepository.deleteAll(userTokens);
+        }
+        userRepository.deleteById(userId);
     }
 }
