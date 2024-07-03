@@ -15,7 +15,7 @@ public class UserRegisterDTO {
     @NotBlank(message = "Phone number is required")
     private String phoneNumber;
 
-    @NotBlank(message = "Email is required")
+//    @NotBlank(message = "Email is required")
     private String email;
 
     @NotBlank(message = "Password is required")

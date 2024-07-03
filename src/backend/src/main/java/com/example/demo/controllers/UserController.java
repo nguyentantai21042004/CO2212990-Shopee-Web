@@ -21,6 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -37,6 +38,7 @@ public class UserController {
     private final ITokenService tokenService;
 
     @GetMapping("")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ResponseObject> getAllUser(
             @RequestParam(defaultValue = "", required = false) String keyword,
             @RequestParam(defaultValue = "0") int page,
@@ -152,6 +154,7 @@ public class UserController {
                         .build());
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SELLER')")
     @PostMapping("details")
     public ResponseEntity<ResponseObject> getUserDetail(
             @RequestHeader("Authorization") String authorizationHeader
@@ -166,6 +169,7 @@ public class UserController {
                 .build());
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SELLER')")
     @PutMapping("details/{userId}")
     public ResponseEntity<ResponseObject> updateUserDetail(
             @PathVariable String userId,
@@ -195,6 +199,7 @@ public class UserController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SELLER')")
     @PutMapping("details/resetPassword/{userId}")
     public ResponseEntity<ResponseObject> changePassword(
             @PathVariable String userId,
@@ -224,15 +229,7 @@ public class UserController {
         }
     }
 
-    // FOR USER
-//    @GetMapping("details/forgetPassword/{userId}")
-//    public ResponseEntity<ResponseObject> forgetPasswordUserDetail(
-//            @RequestBody UserForgetPasswordDTO userForgetPasswordDTO
-//    ) throws Exception {
-//        User user = userService.getUserDetailFromPhoneNumberAndEmail(userForgetPasswordDTO);
-//
-//    }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SELLER')")
     @DeleteMapping("details/{userId}")
     public ResponseEntity<ResponseObject> deleteUserDetail(
             @PathVariable String userId,

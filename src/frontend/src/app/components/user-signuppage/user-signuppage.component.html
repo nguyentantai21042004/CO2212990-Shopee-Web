@@ -1,0 +1,410 @@
+<app-signup-navbar></app-signup-navbar>
+
+<swiper-container #swiperContainer>
+    <swiper-slide>
+        <div class="user-login">
+            <div class="login-container">
+                <div class="form">
+                    <div class="form-container">
+                        <div class="form-header">
+                            Đăng ký
+                        </div>
+
+                        <div class="form-information">
+                            <form #registerForm="ngForm"
+                                [ngClass]="{'invalid': isPhoneNumberValid === false}">
+                                <div class="form-group">
+                                    <input type="text" id="phoneNumber"
+                                        name="phoneNumber"
+                                        placeholder="Số điện thoại"
+                                        [(ngModel)]="phoneNumber"
+                                        (keyup)="onPhoneNumberChange()"
+                                        required>
+
+                                    <i class="fa-regular fa-circle-check"
+                                        [ngClass]="{'fa-circle-check': isPhoneNumberValid === true}"
+                                        style="color: #4de4b7;"></i>
+
+                                    <div class="error-message"
+                                        *ngIf="isPhoneNumberValid === false">
+                                        Số điện thoại không hợp lệ
+                                    </div>
+                                </div>
+
+                                <button type="submit"
+                                    [ngClass]="{'active': isPhoneNumberValid === true}"
+                                    [disabled]="isPhoneNumberValid === null || !isPhoneNumberValid"
+                                    (click)="openDialog()">
+                                    TIẾP THEO
+                                </button>
+
+                                <div class="space">
+                                    <div class="x-space"></div>
+                                    <div class="x-content"
+                                        style="font-size: 14px; color: rgb(185, 185, 185);">
+                                        HOẶC
+                                    </div>
+                                    <div class="x-space"></div>
+                                </div>
+
+                                <div class="account-btn-container">
+                                    <div class="account-btn">
+                                        <i class="fa-brands fa-facebook"
+                                            style="color: #3573de; 
+                                        margin-right: 6px; margin-top: 1px; font-size: 23px;"></i>
+                                        Facebook
+                                    </div>
+                                    <div class="account-btn">
+                                        <i class="fa-brands fa-google"
+                                            style="color: #b6653a; 
+                                        margin-right: 6px; margin-top: 1px; font-size: 23px;"></i>
+                                        Google
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="form-conditions">
+                                Bằng việc đăng kí, bạn đã đồng ý với Shopee về
+                                <div class="cond-links">
+                                    <a href="#">Điều khoản dịch vụ</a>
+                                    &
+                                    <a href="#">Chính sách bảo mật</a>
+                                </div>
+                            </div>
+
+                            <div class="form-login-container">
+                                Bạn đã có tài khoản?
+                                <a href="#">Đăng nhập</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </swiper-slide>
+    <swiper-slide>
+        <div class="authen-login">
+            <div class="authen-container">
+                <div class="authen-step-container">
+                    <div class="circle-container">
+
+                        <div class="circle-wrapper">
+                            <div class="circle">
+                                <div class="number">1</div>
+                            </div>
+                            <div class="text">Xác minh số điện thoại</div>
+                        </div>
+
+                        <div class="arrow">
+                            <div class="arrow-shaft"
+                                style="background-color: grey;"></div>
+                            <div class="arrow-head"
+                                style="border-left-color: grey;"></div>
+                        </div>
+
+                        <div class="circle-wrapper">
+                            <div class="circle"
+                                style="background-color: white;">
+                                <div class="number" style="color: grey;">2</div>
+                            </div>
+                            <div class="text" style="color: grey;">
+                                Tạo mật khẩu
+                            </div>
+                        </div>
+
+                        <div class="arrow">
+                            <div class="arrow-shaft"
+                                style="background-color: grey;"></div>
+                            <div class="arrow-head"
+                                style="border-left-color: grey;"></div>
+                        </div>
+
+                        <div class="circle-wrapper">
+                            <div class="circle"
+                                style="background-color: white;">
+                                <div class="number" style="color: grey;">3</div>
+                            </div>
+                            <div class="text" style="color: grey;">
+                                Hoàn thành
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="authen-form">
+                <div class="authen-form-container">
+                    <div class="left-arrow"
+                        (click)="goToPrevSlide(swiperContainer)">
+                        <div class="arrow-head"></div>
+                        <div class="arrow-shaft"></div>
+                    </div>
+
+                    <div class="authen-form-header"
+                        style="font-size: 18px;">
+                        Vui lòng nhập email
+                    </div>
+
+                    <div class="authen-form-content"
+                        style="margin: 20px 0px; line-height: 25px;">
+                        Mã xác minh sẽ được gửi bằng email để xác nhận số điện
+                        thoại <i class="fa-solid fa-phone-volume"></i>
+                        {{this.phoneNumber}}
+                    </div>
+
+                    <form #registerForm="ngForm"
+                        [ngClass]="{'invalid': isEmailValid === false}">
+                        <div class="form-group">
+                            <input type="text" id="email"
+                                name="email"
+                                placeholder="Email"
+                                [(ngModel)]="email"
+                                (keyup)="onEmailChange()"
+                                required>
+
+                            <i class="fa-regular fa-circle-check"
+                                [ngClass]="{'fa-circle-check': isEmailValid === true}"
+                                style="color: #4de4b7;"></i>
+
+                            <div class="error-message"
+                                *ngIf="isEmailValid === false">
+                                Định dạng email không hợp lệ
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            [ngClass]="{'active': isEmailValid === true}"
+                            [disabled]="isEmailValid === null || !isEmailValid">
+                            XÁC NHẬN
+                        </button>
+                    </form>
+
+                    <div class="authen-form-warning"
+                        style="margin: 20px 0px; line-height: 20px;">
+                        Nếu bạn chưa có email, hãy tạo tài khoản trước tiên <a
+                            href="#"
+                            style="text-decoration: none; color: #ee4d2d;">tại
+                            đây</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </swiper-slide>
+    <swiper-slide>
+        <div class="authen-login">
+            <div class="authen-container">
+                <div class="authen-step-container">
+                    <div class="circle-container">
+
+                        <div class="circle-wrapper">
+                            <div class="circle">
+                                <div class="number">1</div>
+                            </div>
+                            <div class="text">Xác minh số điện thoại</div>
+                        </div>
+
+                        <div class="arrow">
+                            <div class="arrow-shaft"></div>
+                            <div class="arrow-head"></div>
+                        </div>
+
+                        <div class="circle-wrapper">
+                            <div class="circle">
+                                <div class="number">2</div>
+                            </div>
+                            <div class="text">
+                                Tạo mật khẩu
+                            </div>
+                        </div>
+
+                        <div class="arrow">
+                            <div class="arrow-shaft"
+                                style="background-color: grey;"></div>
+                            <div class="arrow-head"
+                                style="border-left-color: grey;"></div>
+                        </div>
+
+                        <div class="circle-wrapper">
+                            <div class="circle"
+                                style="background-color: white;">
+                                <div class="number" style="color: grey;">3</div>
+                            </div>
+                            <div class="text" style="color: grey;">
+                                Hoàn thành
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="authen-form">
+                <div class="authen-form-container">
+                    <div class="left-arrow"
+                        (click)="goToPrevSlide(swiperContainer)">
+                        <div class="arrow-head"></div>
+                        <div class="arrow-shaft"></div>
+                    </div>
+
+                    <div class="authen-form-header"
+                        style="font-size: 18px;">
+                        Vui lòng nhập email
+                    </div>
+
+                    <div class="authen-form-content"
+                        style="margin: 20px 0px; line-height: 25px;">
+                        Mã xác minh sẽ được gửi bằng email để xác nhận số điện
+                        thoại <i class="fa-solid fa-phone-volume"></i>
+                        {{this.phoneNumber}}
+                    </div>
+
+                    <form #registerForm="ngForm"
+                        [ngClass]="{'invalid': isEmailValid === false}">
+                        <div class="form-group">
+                            <input type="text" id="email"
+                                name="email"
+                                placeholder="Email"
+                                [(ngModel)]="email"
+                                (keyup)="onEmailChange()"
+                                required>
+
+                            <i class="fa-regular fa-circle-check"
+                                [ngClass]="{'fa-circle-check': isEmailValid === true}"
+                                style="color: #4de4b7;"></i>
+
+                            <div class="error-message"
+                                *ngIf="isEmailValid === false">
+                                Định dạng email không hợp lệ
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            [ngClass]="{'active': isEmailValid === true}"
+                            [disabled]="isEmailValid === null || !isEmailValid">
+                            XÁC NHẬN
+                        </button>
+                    </form>
+
+                    <div class="authen-form-warning"
+                        style="margin: 20px 0px; line-height: 20px;">
+                        Nếu bạn chưa có email, hãy tạo tài khoản trước tiên <a
+                            href="#"
+                            style="text-decoration: none; color: #ee4d2d;">tại
+                            đây</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </swiper-slide>
+    <swiper-slide>
+        <div class="authen-login">
+            <div class="authen-container">
+                <div class="authen-step-container">
+                    <div class="circle-container">
+
+                        <div class="circle-wrapper">
+                            <div class="circle">
+                                <div class="number">1</div>
+                            </div>
+                            <div class="text">Xác minh số điện thoại</div>
+                        </div>
+
+                        <div class="arrow">
+                            <div class="arrow-shaft"></div>
+                            <div class="arrow-head"></div>
+                        </div>
+
+                        <div class="circle-wrapper">
+                            <div class="circle">
+                                <div class="number">2</div>
+                            </div>
+                            <div class="text">
+                                Tạo mật khẩu
+                            </div>
+                        </div>
+
+                        <div class="arrow">
+                            <div class="arrow-shaft"></div>
+                            <div class="arrow-head"></div>
+                        </div>
+
+                        <div class="circle-wrapper">
+                            <div class="circle">
+                                <div class="number">3</div>
+                            </div>
+                            <div class="text">
+                                Hoàn thành
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="authen-form">
+                <div class="authen-form-container">
+                    <div class="left-arrow"
+                        (click)="goToPrevSlide(swiperContainer)">
+                        <div class="arrow-head"></div>
+                        <div class="arrow-shaft"></div>
+                    </div>
+
+                    <div class="authen-form-header"
+                        style="font-size: 18px;">
+                        Vui lòng nhập email
+                    </div>
+
+                    <div class="authen-form-content"
+                        style="margin: 20px 0px; line-height: 25px;">
+                        Mã xác minh sẽ được gửi bằng email để xác nhận số điện
+                        thoại <i class="fa-solid fa-phone-volume"></i>
+                        {{this.phoneNumber}}
+                    </div>
+
+                    <form #registerForm="ngForm"
+                        [ngClass]="{'invalid': isEmailValid === false}">
+                        <div class="form-group">
+                            <input type="text" id="email"
+                                name="email"
+                                placeholder="Email"
+                                [(ngModel)]="email"
+                                (keyup)="onEmailChange()"
+                                required>
+
+                            <i class="fa-regular fa-circle-check"
+                                [ngClass]="{'fa-circle-check': isEmailValid === true}"
+                                style="color: #4de4b7;"></i>
+
+                            <div class="error-message"
+                                *ngIf="isEmailValid === false">
+                                Định dạng email không hợp lệ
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            [ngClass]="{'active': isEmailValid === true}"
+                            [disabled]="isEmailValid === null || !isEmailValid">
+                            XÁC NHẬN
+                        </button>
+                    </form>
+
+                    <div class="authen-form-warning"
+                        style="margin: 20px 0px; line-height: 20px;">
+                        Nếu bạn chưa có email, hãy tạo tài khoản trước tiên <a
+                            href="#"
+                            style="text-decoration: none; color: #ee4d2d;">tại
+                            đây</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </swiper-slide>
+</swiper-container>
+<app-footer></app-footer>
+
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
