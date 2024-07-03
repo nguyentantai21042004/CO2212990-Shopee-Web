@@ -1,37 +1,45 @@
+.footer {
+    width: 100vw;
+    background-color: #f5f5f5;
+}
+
 .container {
     width: 1200px;
     padding: 0;
-
-    height: 1000px;
-    background-color: aqua;
 }
 
+/* --------------------------------------------------------------------- */
+/* ----------------------------app-relation----------------------------- */
+/* --------------------------------------------------------------------- */
 .app-relation {
-    width: 100%;
-    height: 430px;
+    padding-top: 50px;
+    width: 1200px;
+    height: 450px;
 
     display: flex;
     justify-content: space-around;
-    background-color: bisque;
+    background-color: #f5f5f5;
 }
 
 .app-relation .relation-column .column-header {
-    height: 40px;
-    width: 170px;
+    height: 35px;
+    width: 200px;
     font-size: 12px;
     font-weight: 700;
 
     display: flex;
     align-items: start;
-
-    background-color: aqua;
 }
 
 .app-relation .relation-column ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    // padding: 10px 0; 
+}
+
+.app-relation .relation-column ul li {
+    display: block;
+    margin-bottom: 4px;
 }
 
 .app-relation .relation-column ul li a {
@@ -43,4 +51,212 @@
 
 .app-relation .relation-column ul li a:hover {
     color: rgb(240, 120, 97);
+}
+
+.app-relation .relation-column.part {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.relation-row {
+    margin-top: 10px;
+    display: flex;
+}
+
+.relation-container {
+    height: 30px;
+    width: 60px;
+
+    border-radius: 3px;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, .06);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #ffffff;
+}
+
+.relation-container:not(:last-child) {
+    margin-right: 10px;
+}
+
+.relation-container img {
+    max-width: 60px;
+    height: auto;
+    object-fit: cover;
+}
+
+.app-relation .relation-column .link-social li {
+    margin-top: 10px;
+
+    display: flex;
+    align-items: center;
+    height: 20px;
+    width: 80px;
+
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.app-relation .relation-column .link-social li:hover {
+    color: rgb(240, 120, 97);
+}
+
+.app-relation .relation-column .download-container {
+    width: 100%;
+    height: 150px;
+
+    display: flex;
+}
+
+.app-relation .download-container .qrcode-container {
+    width: 100px;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, .06);
+}
+
+.app-relation .download-container .qrcode-container img {
+    width: 88px;
+    height: 88px;
+}
+
+.app-relation .download-container .downapp-container {
+    width: 100px;
+    height: 100px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.download-container .downapp-container .app-link-container {
+    width: 92px;
+    height: 24px;
+
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(133, 124, 124);
+
+    border-radius: 3px;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, .06);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* --------------------------------------------------------------------- */
+/* -----------------------------app-regions----------------------------- */
+/* --------------------------------------------------------------------- */
+.app-regions {
+    width: 1200px;
+    height: 100px;
+
+    border-top: 1px solid rgba(0, 0, 0, .54);
+
+    display: flex;
+    align-items: center;
+}
+
+.app-regions .region-container {
+    width: 1200px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    overflow: hidden;
+}
+
+.app-regions .region-container .item {
+    font-size: 12px;
+    color: rgba(0, 0, 0, .54);
+}
+
+.app-regions .region-container .region {
+    display: flex;
+    font-size: 12px;
+    color: rgba(0, 0, 0, .56);
+}
+
+.app-regions .region-container .region .region-list {
+    display: flex;
+
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.app-regions .region-container .region .region-list li {
+    display: block;
+    padding: 0px 10px;
+}
+
+.app-regions .region-container .region .region-list li:not(:last-child) {
+    border-right: 0.5px solid #ccc;
+}
+
+.app-regions .region-container .region .region-list li a {
+    display: block;
+    height: 20px;
+    text-decoration: none;
+    font-size: 12px;
+    color: rgba(0, 0, 0, .54);
+}
+
+/* --------------------------------------------------------------------- */
+/* -----------------------------app-legital----------------------------- */
+/* --------------------------------------------------------------------- */
+.app-legital {
+    width: 1200px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-legital .img-container {
+    height: 50px;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+}
+
+.app-legital .img-container:not(:last-child) {
+    margin-right: 20px;
+}
+
+.app-legital .img-container img {
+    height: 50px;
+    width: auto;
+}
+
+/* --------------------------------------------------------------------- */
+/* ------------------------------app-idea------------------------------- */
+/* --------------------------------------------------------------------- */
+.app-idea {
+    width: 1200px;
+    height: 100px;
+
+    font-size: 12px;
+    color: rgba(0, 0, 0, .54);
+}
+
+.app-idea .app-admin,
+.app-idea .content,
+.app-idea .admin-place {
+    margin-top: 10px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
 }
