@@ -1,7 +1,31 @@
 <app-signup-navbar></app-signup-navbar>
 
 <swiper-container #swiperContainer>
+
+    <!-- This Slide to get phoneNumber -->
     <swiper-slide>
+        <div id="myModalBox" class="modal-box-container"
+            [ngStyle]="{'display': display}"
+            (click)="stopPropagation($event)">
+            <div class="modal-box-content">
+                <div class="contents"> Bạn sẽ nhận được mã xác minh từ một cuộc
+                    gọi thoại đến: {{
+                    this.registerDTO.phoneNumber }}
+                </div>
+
+                <div class="actions">
+                    <div class="modal-button close-button"
+                        (click)="closeDialog()">
+                        TRỞ LẠI
+                    </div>
+                    <div class="modal-button"
+                        (click)="goToNextSlide(swiperContainer)">
+                        GỌI CHO TÔI
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="user-login">
             <div class="login-container">
                 <div class="form">
@@ -31,7 +55,7 @@
                                     </div>
                                 </div>
 
-                                <button type="submit"
+                                <button id="myBtn" type="submit"
                                     [ngClass]="{'active': isPhoneNumberValid === true}"
                                     [disabled]="isPhoneNumberValid === null || !isPhoneNumberValid"
                                     (click)="openDialog()">
@@ -83,7 +107,9 @@
             </div>
         </div>
     </swiper-slide>
-    <swiper-slide>
+
+    <!-- This Slide to get Email -->
+    <swiper-slide class="email-authen">
         <div class="authen-login">
             <div class="authen-container">
                 <div class="authen-step-container">
@@ -154,7 +180,8 @@
                     </div>
 
                     <form #registerForm="ngForm"
-                        [ngClass]="{'invalid': isEmailValid === false}">
+                        [ngClass]="{'invalid': isEmailValid === false}"
+                        style="margin-top: 5px;">
                         <div class="form-group">
                             <input type="text" id="email"
                                 name="email"
@@ -175,7 +202,8 @@
 
                         <button type="submit"
                             [ngClass]="{'active': isEmailValid === true}"
-                            [disabled]="isEmailValid === null || !isEmailValid">
+                            [disabled]="isEmailValid === null || !isEmailValid"
+                            (click)="goToNextSlide(swiperContainer)">
                             XÁC NHẬN
                         </button>
                     </form>
@@ -192,7 +220,9 @@
             </div>
         </div>
     </swiper-slide>
-    <swiper-slide>
+
+    <!-- This Slide to get Password -->
+    <swiper-slide class="password-authen">
         <div class="authen-login">
             <div class="authen-container">
                 <div class="authen-step-container">
@@ -249,61 +279,71 @@
 
                     <div class="authen-form-header"
                         style="font-size: 18px;">
-                        Vui lòng nhập email
+                        Thiết Lập Mật Khẩu
                     </div>
 
                     <div class="authen-form-content"
-                        style="margin: 20px 0px; line-height: 25px;">
-                        Mã xác minh sẽ được gửi bằng email để xác nhận số điện
-                        thoại <i class="fa-solid fa-phone-volume"></i>
-                        {{this.phoneNumber}}
+                        style="margin: 20px 0px; line-height: 20px; padding: 0px 50px;">
+                        Bước cuối! Thiết lập mật khẩu để hoàn tất việc đăng ký.
                     </div>
 
                     <form #registerForm="ngForm"
-                        [ngClass]="{'invalid': isEmailValid === false}">
+                        [ngClass]="{'invalid': isPasswordValid === false}"
+                        style="margin-top: 5px; padding: 0px 40px;">
                         <div class="form-group">
-                            <input type="text" id="email"
-                                name="email"
-                                placeholder="Email"
-                                [(ngModel)]="email"
-                                (keyup)="onEmailChange()"
+                            <input type="text" id="password"
+                                name="password"
+                                placeholder="Mật khẩu"
+                                [(ngModel)]="password"
+                                (keyup)="onPasswordChange()"
                                 required>
 
                             <i class="fa-regular fa-circle-check"
-                                [ngClass]="{'fa-circle-check': isEmailValid === true}"
+                                [ngClass]="{'fa-circle-check': isPasswordValid === true}"
                                 style="color: #4de4b7;"></i>
 
-                            <div class="error-message"
-                                *ngIf="isEmailValid === false">
-                                Định dạng email không hợp lệ
+                            <div class="error-message password-error"
+                                style="background-color: #fff; height: 100px;">
+                                <div class="err"
+                                    [ngClass]="{'error-on': isAtLeastLowercaseCharacter === false}">
+                                    Ít nhất một kí tự viết thường
+                                </div>
+                                <div class="err"
+                                    [ngClass]="{'error-on': isAtLeastUppercaseCharacter === false}">
+                                    Ít nhất một kí tự viết hoa
+                                </div>
+                                <div class="err"
+                                    [ngClass]="{'error-on': isEnoughCharacters === false}">
+                                    8-16 kí tự
+                                </div>
+                                <div class="err"
+                                    [ngClass]="{'error-on': isJustPopularCharacters === false}">
+                                    Chỉ các chữ cái, số và kí tự phổ biến
+                                    mới có thể được sử dụng
+                                </div>
                             </div>
                         </div>
 
                         <button type="submit"
-                            [ngClass]="{'active': isEmailValid === true}"
-                            [disabled]="isEmailValid === null || !isEmailValid">
-                            XÁC NHẬN
+                            [ngClass]="{'active': isPasswordValid === true}"
+                            [disabled]="isPasswordValid === null || !isPasswordValid"
+                            (click)="goToNextSlide(swiperContainer)">
+                            ĐĂNG KÝ
                         </button>
+
+                        <div style="padding-bottom: 25px;"></div>
+
                     </form>
-
-                    <div class="authen-form-warning"
-                        style="margin: 20px 0px; line-height: 20px;">
-                        Nếu bạn chưa có email, hãy tạo tài khoản trước tiên <a
-                            href="#"
-                            style="text-decoration: none; color: #ee4d2d;">tại
-                            đây</a>
-                    </div>
-
                 </div>
             </div>
         </div>
     </swiper-slide>
-    <swiper-slide>
+
+    <swiper-slide class="success-authen">
         <div class="authen-login">
             <div class="authen-container">
                 <div class="authen-step-container">
                     <div class="circle-container">
-
                         <div class="circle-wrapper">
                             <div class="circle">
                                 <div class="number">1</div>
@@ -342,61 +382,36 @@
                 </div>
             </div>
 
-            <div class="authen-form">
-                <div class="authen-form-container">
-                    <div class="left-arrow"
-                        (click)="goToPrevSlide(swiperContainer)">
-                        <div class="arrow-head"></div>
-                        <div class="arrow-shaft"></div>
-                    </div>
+            <div class="success-form">
+                <div class="success-form-container">
 
-                    <div class="authen-form-header"
+                    <div class="success-form-header"
                         style="font-size: 18px;">
-                        Vui lòng nhập email
+                        Đăng ký thành công!
                     </div>
 
-                    <div class="authen-form-content"
-                        style="margin: 20px 0px; line-height: 25px;">
-                        Mã xác minh sẽ được gửi bằng email để xác nhận số điện
-                        thoại <i class="fa-solid fa-phone-volume"></i>
-                        {{this.phoneNumber}}
+                    <div class="success-form-icon" style="margin-top: 20px;">
+                        <i class="fa-regular fa-circle-check success-icon"></i>
                     </div>
 
-                    <form #registerForm="ngForm"
-                        [ngClass]="{'invalid': isEmailValid === false}">
-                        <div class="form-group">
-                            <input type="text" id="email"
-                                name="email"
-                                placeholder="Email"
-                                [(ngModel)]="email"
-                                (keyup)="onEmailChange()"
-                                required>
-
-                            <i class="fa-regular fa-circle-check"
-                                [ngClass]="{'fa-circle-check': isEmailValid === true}"
-                                style="color: #4de4b7;"></i>
-
-                            <div class="error-message"
-                                *ngIf="isEmailValid === false">
-                                Định dạng email không hợp lệ
-                            </div>
+                    <div class="success-form-content"
+                        style="margin: 20px 0px; line-height: 25px; padding: 0 45px;">
+                        <div class="first-line">
+                            Bạn đã tạo thành công tài khoản Shopee với số
+                            <span style="color: #ee4d2d;">{{
+                                this.registerDTO.phoneNumber }}</span>
                         </div>
 
-                        <button type="submit"
-                            [ngClass]="{'active': isEmailValid === true}"
-                            [disabled]="isEmailValid === null || !isEmailValid">
-                            XÁC NHẬN
-                        </button>
-                    </form>
-
-                    <div class="authen-form-warning"
-                        style="margin: 20px 0px; line-height: 20px;">
-                        Nếu bạn chưa có email, hãy tạo tài khoản trước tiên <a
-                            href="#"
-                            style="text-decoration: none; color: #ee4d2d;">tại
-                            đây</a>
+                        <div class="second-line" style="margin-top: 20px;">
+                            Bạn sẽ được chuyển hướng đến Shopee trong
+                            {{this.countdownTimer}} giây
+                        </div>
                     </div>
 
+                    <button style="padding: 0 45px;"
+                        (click)="navigateToOtherComponent()">
+                        Quay lại Shopee
+                    </button>
                 </div>
             </div>
         </div>

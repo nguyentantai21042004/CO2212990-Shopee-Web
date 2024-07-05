@@ -9,9 +9,10 @@ swiper-slide {
 
 }
 
+
 /* ----------------------------------------------------------- */
-/* ------------------------HomePage--------------------------- */
-/* ----------------------------------------------------------- */
+/* --------------------------HomePage------------------------- */
+/* ------------------------Phone Number----------------------- */
 .user-login {
     width: 100vw;
     height: 600px;
@@ -37,7 +38,7 @@ swiper-slide {
 
 .form {
     width: 400px;
-    height: 430px;
+    min-height: 430px;
 
     padding: 5px;
     border-radius: 5px;
@@ -74,10 +75,10 @@ swiper-slide {
 }
 
 form .form-group {
-    height: 40px;
+    min-height: 40px;
     border-radius: 2px;
 
-    background-color: red;
+    // background-color: red;
 }
 
 form .form-group input[type="text"] {
@@ -138,11 +139,15 @@ form .form-group .fa-circle-check {
     .form-group .error-message {
         color: red;
         font-size: 12px;
-        margin-top: 4px;
     }
 
-
+    .form-group .password-error .error {
+        color: red;
+        font-size: 12px;
+        // margin-top: 4px;
+    }
 }
+
 
 form .space {
     margin-top: 25px;
@@ -234,6 +239,73 @@ form .account-btn-container .account-btn:hover {
     text-decoration: none;
     color: #ee4d2d;
 }
+
+/* ----------------------Popup Modal Box---------------------- */
+.modal-box-container {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-box-container .modal-box-content {
+    background-color: #fefefe;
+    margin: 12% auto;
+    border-radius: 5px;
+
+    transition: opacity 1s ease, visibility 0.5s ease;
+    padding: 35px;
+    border: 1px solid #888;
+    width: 400px;
+}
+
+.modal-box-container .modal-box-content .contents {
+    text-align: center;
+
+    line-height: 20px;
+    font-size: 16px;
+    color: grey;
+}
+
+.modal-box-container .modal-box-content .actions {
+    padding: 0px 25px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal-box-content .actions .modal-button {
+    margin-top: 25px;
+
+    height: 37px;
+    width: 130px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid #888;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, .06);
+    cursor: pointer;
+
+    line-height: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #f06246;
+}
+
+.modal-box-content .actions .modal-button.close-button {
+    color: grey;
+    background-color: #fff;
+}
+
 
 /* ----------------------------------------------------------- */
 /* ------------------------Nth Page--------------------------- */
@@ -360,11 +432,10 @@ form .account-btn-container .account-btn:hover {
     display: flex;
     flex-direction: column;
     text-align: center;
+    justify-content: center;
 
     font-size: 14px;
     box-shadow: 6px 6px 6px 6px rgba(0, 0, 0, .06);
-
-    background-color: w;
 }
 
 
@@ -399,4 +470,93 @@ form .account-btn-container .account-btn:hover {
     border-bottom: 10px solid transparent;
     border-right: 10px solid #ee4d2d;
     transform: translateY(-50%);
+}
+
+
+/* ----------------------------------------------------------- */
+/* --------------------EMAIL AUTHENTICATION------------------- */
+/* ----------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------- */
+/* -------------------PASSWORD AUTHENTICATION----------------- */
+/* ----------------------------------------------------------- */
+form .form-group .password-error {
+    margin-top: 7px;
+    display: flex;
+    flex-direction: column;
+
+    align-items: first baseline;
+    text-align: left;
+}
+
+form .form-group .password-error .error:first-child {
+    margin-top: 8px;
+}
+
+
+form .form-group .password-error .err {
+    font-size: 13px;
+    color: grey;
+    line-height: 16px;
+
+    margin: 5px 0;
+    margin-left: 2px;
+}
+
+.error-on {
+    color: red !important;
+    font-size: 12px;
+}
+
+/* ----------------------------------------------------------- */
+/* --------------------SUCCESS AUTHENTICATION----------------- */
+/* ----------------------------------------------------------- */
+.success-form {
+    width: 600px;
+    height: 500px;
+    max-height: 500px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // background-color: aquamarine;
+}
+
+.success-form .success-form-container {
+    width: 450px;
+    // height: 320px;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    font-size: 14px;
+    box-shadow: 6px 6px 6px 6px rgba(0, 0, 0, .06);
+}
+
+.success-form .success-form-container .success-form-content .first-line,
+.success-form .success-form-container .success-form-content .second-line {
+    line-height: 17px;
+}
+
+.success-form .success-form-container .success-form-icon .success-icon {
+    font-size: 45px;
+    color: forestgreen;
+}
+
+.success-form .success-form-container button {
+    margin-top: 25px;
+    width: 75%;
+    height: 40px;
+    background-color: #ee4d2d;
+    cursor: pointer;
+    font-weight: 500;
+    color: white;
+    border: 0;
+    border-radius: 2px;
 }
