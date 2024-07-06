@@ -1,9 +1,8 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RegisterDTO } from 'src/app/dtos/register.dtos';
-import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-signuppage',
@@ -40,12 +39,12 @@ export class UserSignuppageComponent implements OnInit {
     googleAccountId: ''
   }
 
-  constructor(private router: Router, private dialog: MatDialog) {
+  constructor(private router: Router) {
     this.phoneNumber = '';
     this.email = '';
     this.password = '';
 
-    this.countdownTimer = 100;
+    this.countdownTimer = 10;
 
     this.registerDTO.roleName = "USER";
     this.isPhoneNumberValid = null;
@@ -86,6 +85,7 @@ export class UserSignuppageComponent implements OnInit {
     );
   }
 
+  /* CHECK INPUT FROM FORM DATA */
   onPhoneNumberChange() {
     if (this.phoneNumber.trim() === '') {
       this.isPhoneNumberValid = null;
@@ -123,21 +123,21 @@ export class UserSignuppageComponent implements OnInit {
     this.startCountdown();
   }
 
+
   startCountdown(): void {
     let timer = setInterval(() => {
       this.countdownTimer--;
 
       if (this.countdownTimer <= 0) {
         clearInterval(timer);
-        this.navigateToOtherComponent(); // Gọi phương thức điều hướng khi countdown kết thúc
+        this.navigateToOtherComponent();
       }
       console.log(this.countdownTimer);
     }, 1000);
   }
 
   navigateToOtherComponent(): void {
-    // Điều hướng đến component khác bằng Router
-    this.router.navigate(['']); // Thay '/other-component' bằng đường dẫn của component mà bạn muốn điều hướng đến
+    this.router.navigate(['']);
   }
 
   openDialog() {
@@ -146,14 +146,6 @@ export class UserSignuppageComponent implements OnInit {
 
   closeDialog() {
     this.display = 'none';
-  }
-
-  @HostListener('window:click', ['$event'])
-  onWindowClick(event: Event) {
-    const modal = document.getElementById("myModalBox");
-    if (event.target === modal) {
-      this.closeDialog();
-    }
   }
 
   stopPropagation(event: Event) {

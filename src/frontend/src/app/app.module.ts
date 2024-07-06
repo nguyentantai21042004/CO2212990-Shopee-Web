@@ -13,7 +13,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserSignuppageComponent } from './components/user-signuppage/user-signuppage.component';
 import { SignupNavbarComponent } from './components/user-signuppage/signup-navbar/signup-navbar.component';
 import { FormsModule } from '@angular/forms';
-import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 register();
@@ -28,7 +27,6 @@ register();
     AppComponent,
     UserSignuppageComponent,
     SignupNavbarComponent,
-    LoginDialogComponent,
   ],
   imports: [
     BrowserModule,

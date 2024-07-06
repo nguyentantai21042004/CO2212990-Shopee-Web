@@ -9,7 +9,6 @@ swiper-slide {
 
 }
 
-
 /* ----------------------------------------------------------- */
 /* --------------------------HomePage------------------------- */
 /* ------------------------Phone Number----------------------- */
@@ -75,6 +74,7 @@ swiper-slide {
 }
 
 form .form-group {
+    position: relative;
     min-height: 40px;
     border-radius: 2px;
 
@@ -85,7 +85,6 @@ form .form-group input[type="text"] {
     width: 100%;
     height: 100%;
 
-    position: relative;
     border-radius: 2px;
     padding: 12px;
     font-size: 14px;
@@ -99,8 +98,8 @@ form .fa-regular.fa-circle-check {
 
     opacity: 0;
 
-    top: 30.5%;
-    right: 24%;
+    top: 33%;
+    right: 10px;
 }
 
 form .form-group input[type="text"]:focus {
@@ -301,6 +300,15 @@ form .account-btn-container .account-btn:hover {
     background-color: #f06246;
 }
 
+.modal-box-content .actions .modal-button:hover {
+    background-color: #ec7861;
+}
+
+.modal-box-content .actions .modal-button.close-button:hover {
+    color: #fff;
+    background-color: #afadad;
+}
+
 .modal-box-content .actions .modal-button.close-button {
     color: grey;
     background-color: #fff;
@@ -452,7 +460,7 @@ form .account-btn-container .account-btn:hover {
 
 .left-arrow .arrow-shaft {
     position: absolute;
-    left: 10px;
+    left: 8px;
     top: 50%;
     width: 20px;
     height: 8px;

@@ -1,9 +1,9 @@
 <app-signup-navbar></app-signup-navbar>
 
-<swiper-container #swiperContainer>
+<swiper-container #swiperContainer [allowTouchMove]="false">
 
     <!-- This Slide to get phoneNumber -->
-    <swiper-slide>
+    <swiper-slide [allowTouchMove]="false">
         <div id="myModalBox" class="modal-box-container"
             [ngStyle]="{'display': display}"
             (click)="stopPropagation($event)">
@@ -109,7 +109,7 @@
     </swiper-slide>
 
     <!-- This Slide to get Email -->
-    <swiper-slide class="email-authen">
+    <swiper-slide class="email-authen" [allowTouchMove]="false">
         <div class="authen-login">
             <div class="authen-container">
                 <div class="authen-step-container">
@@ -192,7 +192,7 @@
 
                             <i class="fa-regular fa-circle-check"
                                 [ngClass]="{'fa-circle-check': isEmailValid === true}"
-                                style="color: #4de4b7;"></i>
+                                style="color: #4de4b7; top: 35%;"></i>
 
                             <div class="error-message"
                                 *ngIf="isEmailValid === false">
@@ -300,7 +300,7 @@
 
                             <i class="fa-regular fa-circle-check"
                                 [ngClass]="{'fa-circle-check': isPasswordValid === true}"
-                                style="color: #4de4b7;"></i>
+                                style="color: #4de4b7; top: 10.7%;"></i>
 
                             <div class="error-message password-error"
                                 style="background-color: #fff; height: 100px;">
@@ -339,6 +339,7 @@
         </div>
     </swiper-slide>
 
+    <!-- This Slide is to Success -->
     <swiper-slide class="success-authen">
         <div class="authen-login">
             <div class="authen-container">
@@ -402,7 +403,8 @@
                                 this.registerDTO.phoneNumber }}</span>
                         </div>
 
-                        <div class="second-line" style="margin-top: 20px;">
+                        <div class="second-line"
+                            style="margin-top: 20px; padding: 0 5px;">
                             Bạn sẽ được chuyển hướng đến Shopee trong
                             {{this.countdownTimer}} giây
                         </div>
