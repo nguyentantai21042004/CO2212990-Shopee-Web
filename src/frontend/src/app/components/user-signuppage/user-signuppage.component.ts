@@ -2,7 +2,9 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterDTO } from 'src/app/dtos/register.dtos';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { UserService } from 'src/app/services/user.service';
+import { ApiResponse } from 'src/app/responses/api.response';
 
 @Component({
   selector: 'app-user-signuppage',
@@ -39,7 +41,7 @@ export class UserSignuppageComponent implements OnInit {
     googleAccountId: ''
   }
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private userService: UserService) {
     this.phoneNumber = '';
     this.email = '';
     this.password = '';
@@ -119,8 +121,8 @@ export class UserSignuppageComponent implements OnInit {
         console.log(this.registerDTO);
       }
     }
-
-    this.startCountdown();
+    debugger
+    this.register();
   }
 
 
@@ -158,5 +160,27 @@ export class UserSignuppageComponent implements OnInit {
 
   goToPrevSlide(swiperContainer: any): void {
     swiperContainer.swiper.slidePrev();
+  }
+
+  register() {
+    debugger
+    this.userService.register(this.registerDTO).subscribe({
+      next: (apiResponse: ApiResponse) => {
+        debugger
+        // const confirmation = window
+        //   .confirm('Đăng ký thành công, mời bạn đăng nhập. Bấm "OK" để chuyển đến trang đăng nhập.');
+        // if (confirmation) {
+        //   this.router.navigate(['/login']);
+        // }
+      },
+      complete: () => {
+        debugger
+        this.startCountdown();
+      },
+      error: (error: HttpErrorResponse) => {
+        debugger
+        console.error(error?.error?.message ?? '');
+      }
+    })
   }
 }

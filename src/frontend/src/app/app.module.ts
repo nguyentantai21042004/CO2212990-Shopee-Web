@@ -15,6 +15,9 @@ import { SignupNavbarComponent } from './components/user-signuppage/signup-navba
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 
+import { UserService } from './services/user.service';
+import { HttpClientModule } from '@angular/common/http';
+
 register();
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ register();
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     MatDialogModule,
@@ -38,7 +42,7 @@ register();
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [
-
+    UserService
   ],
   bootstrap: [AppComponent]
 })

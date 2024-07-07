@@ -21,7 +21,7 @@ public class UserRegisterDTO {
     @NotBlank(message = "Password is required")
     private String password;
 
-    @NotBlank(message = "RetypePassword is required")
+//    @NotBlank(message = "RetypePassword is required")
     private String retypePassword;
 
     @Builder.Default

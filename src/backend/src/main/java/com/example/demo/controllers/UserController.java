@@ -109,14 +109,14 @@ public class UserController {
             }
         }
 
-        if(!userRegisterDTO.getPassword().equals(userRegisterDTO.getRetypePassword())){
-            return ResponseEntity.badRequest().body(
-                    ResponseObject.builder()
-                            .data(null)
-                            .message("PASSWORD_NOT_MATCH")
-                            .status(HttpStatus.BAD_REQUEST)
-                            .build());
-        }
+//        if(!userRegisterDTO.getPassword().equals(userRegisterDTO.getRetypePassword())){
+//            return ResponseEntity.badRequest().body(
+//                    ResponseObject.builder()
+//                            .data(null)
+//                            .message("PASSWORD_NOT_MATCH")
+//                            .status(HttpStatus.BAD_REQUEST)
+//                            .build());
+//        }
 
         User newUser = userService.createUser(userRegisterDTO);
         return ResponseEntity.ok().body(
