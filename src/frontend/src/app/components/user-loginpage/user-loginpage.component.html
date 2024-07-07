@@ -2,31 +2,61 @@
 
 <div class="user-login">
     <div class="login-container">
-
         <div class="form">
             <div class="form-container">
+
                 <div class="form-header">
-                    Đăng nhập
+                    <div class="right-content">
+                        Đăng nhập
+                    </div>
+
+                    <div class="left-content">
+                        <div class="QR-content">
+                            Đăng nhập với mã QR
+                        </div>
+                        <div class="QR-img">
+                            <i class="fa-solid fa-qrcode"></i>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-information">
+                    <form #loginForm="ngForm">
 
-                    <form action="/login" method="post">
                         <div class="form-group">
-                            <input type="text" id="phoneNumber" name="phoneNumber"
-                                placeholder="Số điện thoại"
+                            <input type="text" id="userName"
+                                name="userName"
+                                [(ngModel)]="userName"
+                                placeholder="Email/Số điện thoại"
+                                (keyup)="onUserNameChange()"
                                 required>
                         </div>
-                        <!-- <div class="form-group">
-                            <input type="password" id="password" name="password"
+
+                        <div class="form-group" style="margin-top: 28px;">
+                            <input type="text" id="password"
+                                name="password"
+                                [(ngModel)]="password"
+                                placeholder="Mật khẩu"
+                                (keyup)="onPasswordChange()"
                                 required>
-                        </div> -->
-                        <button type="submit">TIẾP THEO</button>
+                        </div>
+
+                        <button type="submit"
+                            [ngClass]="{'active': isLoginDTO === true}"
+                            [disabled]="isLoginDTO === null || !isLoginDTO"
+                            (click)="login()">
+                            ĐĂNG NHẬP
+                        </button>
+
+                        <div class="option-container">
+                            <a href="#">Quên mật khẩu</a>
+                            <a href="#">Đăng nhập với SMS</a>
+                        </div>
 
                         <div class="space">
                             <div class="x-space"></div>
                             <div class="x-content"
-                                style="font-size: 14px; color: rgb(185, 185, 185);">
+                                style="font-size: 13px; color: rgb(185, 185, 185);">
                                 HOẶC
                             </div>
                             <div class="x-space"></div>
@@ -34,31 +64,24 @@
 
                         <div class="account-btn-container">
                             <div class="account-btn">
-                                <i class="fa-brands fa-facebook" style="color: #3573de; 
+                                <i class="fa-brands fa-facebook"
+                                    style="color: #3573de; 
                                 margin-right: 6px; margin-top: 1px; font-size: 23px;"></i>
                                 Facebook
                             </div>
                             <div class="account-btn">
-                                <i class="fa-brands fa-google" style="color: #b6653a; 
+                                <i class="fa-brands fa-google"
+                                    style="color: #b6653a; 
                                 margin-right: 6px; margin-top: 1px; font-size: 23px;"></i>
                                 Google
                             </div>
                         </div>
                     </form>
+                </div>
 
-                    <div class="form-conditions">
-                        Bằng việc đăng kí, bạn đã đồng ý với Shopee về 
-                        <div class="cond-links">
-                            <a href="#">Điều khoản dịch vụ</a>
-                            &
-                            <a href="#">Chính sách bảo mật</a>
-                        </div>
-                    </div>
-
-                    <div class="form-login-container">
-                        Bạn đã có tài khoản? 
-                        <a href="#">Đăng nhập</a>
-                    </div>
+                <div class="form-link">
+                    Bạn mới biết đến Shopee?
+                    <a routerLink="/user/signup">Đăng ký</a>
                 </div>
             </div>
         </div>

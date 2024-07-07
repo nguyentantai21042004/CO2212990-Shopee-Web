@@ -3,10 +3,9 @@ swiper-container {
     height: 600px;
 }
 
-swiper-slide {
+.swiper-slide {
     width: 100vw;
     height: 600px;
-
 }
 
 /* ----------------------------------------------------------- */
@@ -202,6 +201,24 @@ form .account-btn-container .account-btn:hover {
     justify-content: center;
 
     // background-color: aqua;
+}
+
+.form .form-container .form-link {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.26);
+}
+
+.form .form-container .form-link a {
+    padding-left: 4px;
+    font-weight: 500;
+
+    text-decoration: none;
+    color: rgb(238, 77, 45);
 }
 
 .form-information .form-conditions .cond-links {

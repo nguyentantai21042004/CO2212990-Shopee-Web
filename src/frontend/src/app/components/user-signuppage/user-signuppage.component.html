@@ -1,9 +1,8 @@
 <app-signup-navbar></app-signup-navbar>
 
-<swiper-container #swiperContainer [allowTouchMove]="false">
-
+<swiper-container #swiperContainer noSwiping>
     <!-- This Slide to get phoneNumber -->
-    <swiper-slide [allowTouchMove]="false">
+    <swiper-slide noSwiping>
         <div id="myModalBox" class="modal-box-container"
             [ngStyle]="{'display': display}"
             (click)="stopPropagation($event)">
@@ -37,23 +36,23 @@
                         <div class="form-information">
                             <form #registerForm="ngForm"
                                 [ngClass]="{'invalid': isPhoneNumberValid === false}">
-                                <div class="form-group">
-                                    <input type="text" id="phoneNumber"
-                                        name="phoneNumber"
-                                        placeholder="Số điện thoại"
-                                        [(ngModel)]="phoneNumber"
-                                        (keyup)="onPhoneNumberChange()"
-                                        required>
+                                    <div class="form-group">
+                                        <input type="text" id="phoneNumber"
+                                            name="phoneNumber"
+                                            placeholder="Số điện thoại"
+                                            [(ngModel)]="phoneNumber"
+                                            (keyup)="onPhoneNumberChange()"
+                                            required>
 
-                                    <i class="fa-regular fa-circle-check"
-                                        [ngClass]="{'fa-circle-check': isPhoneNumberValid === true}"
-                                        style="color: #4de4b7;"></i>
+                                        <i class="fa-regular fa-circle-check"
+                                            [ngClass]="{'fa-circle-check': isPhoneNumberValid === true}"
+                                            style="color: #4de4b7;"></i>
 
-                                    <div class="error-message"
-                                        *ngIf="isPhoneNumberValid === false">
-                                        Số điện thoại không hợp lệ
+                                        <div class="error-message"
+                                            *ngIf="isPhoneNumberValid === false">
+                                            Số điện thoại không hợp lệ
+                                        </div>
                                     </div>
-                                </div>
 
                                 <button id="myBtn" type="submit"
                                     [ngClass]="{'active': isPhoneNumberValid === true}"
@@ -96,9 +95,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-login-container">
+                            <div class="form-link">
                                 Bạn đã có tài khoản?
-                                <a href="#">Đăng nhập</a>
+                                <a routerLink="/user/login">Đăng nhập</a>
                             </div>
                         </div>
                     </div>
@@ -109,7 +108,7 @@
     </swiper-slide>
 
     <!-- This Slide to get Email -->
-    <swiper-slide class="email-authen" [allowTouchMove]="false">
+    <swiper-slide class="email-authen" noSwiping>
         <div class="authen-login">
             <div class="authen-container">
                 <div class="authen-step-container">
@@ -222,7 +221,7 @@
     </swiper-slide>
 
     <!-- This Slide to get Password -->
-    <swiper-slide class="password-authen">
+    <swiper-slide class="password-authen" noSwiping>
         <div class="authen-login">
             <div class="authen-container">
                 <div class="authen-step-container">
@@ -340,7 +339,7 @@
     </swiper-slide>
 
     <!-- This Slide is to Success -->
-    <swiper-slide class="success-authen">
+    <swiper-slide class="success-authen" noSwiping>
         <div class="authen-login">
             <div class="authen-container">
                 <div class="authen-step-container">

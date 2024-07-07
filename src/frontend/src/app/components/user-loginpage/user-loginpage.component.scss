@@ -23,47 +23,112 @@
 
 .form {
     width: 400px;
-    height: 430px;
+    height: 480px;
 
-    padding: 5px;
+    padding: 0;
     border-radius: 5px;
 
     display: flex;
     justify-content: center;
-    align-items: center;
 
     background-color: white;
 }
 
 .form .form-container {
     width: 350px;
-    height: 370px;
     padding: 0;
-
-    // background-color: rebeccapurple;
 }
 
+// FORM HEADER 
 .form .form-container .form-header {
-    height: 55px;
+    height: 100px;
 
     display: flex;
-    // align-items: center;
+    align-items: center;
+    justify-content: space-between;
 
     color: #222;
     font-size: 20px;
     line-height: 24px;
-    max-width: 136px;
 }
 
-.form .form-container .form-information {
-    min-height: 300px;
+.form .form-container .form-header .left-content {
+    display: flex;
+    align-items: center;
 }
 
-form .form-group {
-    height: 40px;
+.form .form-container .form-header .left-content .QR-content {
+    position: relative;
+
+    width: 166px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+
+    color: rgb(255, 191, 0);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16.8px;
+
+    padding: 11px 14px;
+
+    border: 2px solid rgb(255, 191, 0);
+    background-color: rgb(254, 250, 236);
+}
+
+.form .form-container .form-header .left-content .QR-content::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -12px;
+
+    height: 12px;
+    width: 12px;
+
+    border-top: 2px solid #ffbf00;
+    border-right: 2px solid #ffbf00;
+
+    transform: rotate(45deg) translateX(-50%);
+    box-sizing: border-box;
+}
+
+.form .form-container .form-header .left-content .QR-img i {
+    font-size: 44px;
+    color: #ee4d2d;
+}
+
+
+// FORM INFORMATION
+.form .form-container .form-header .form .form-container .form-information {
+    height: 330px;
+}
+
+.form .form-container form .form-group {
+    // height: 40px;
     border-radius: 2px;
 
     background-color: red;
+}
+
+.form .form-container .form-link {
+    margin-top: 15px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.26);
+}
+
+.form .form-container .form-link a {
+    padding-left: 4px;
+    font-weight: 500;
+
+    text-decoration: none;
+    color: rgb(238, 77, 45);
 }
 
 form .form-group input[type="text"] {
@@ -97,8 +162,30 @@ form button {
     border-radius: 2px;
 }
 
+form button[type="submit"].active {
+    background-color: #ee4d2d;
+    cursor: pointer;
+}
+
+
+form .option-container {
+    height: 15px;
+    margin: 10px 0px 0px 0px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form .option-container a {
+    text-decoration: none;
+    color: rgb(0, 85, 170);
+
+    font-size: 12px;
+}
+
 form .space {
-    margin-top: 25px;
+    margin-top: 10px;
 
     display: flex;
     align-items: center;
@@ -153,7 +240,7 @@ form .account-btn-container .account-btn:hover {
     // background-color: aqua;
 }
 
-.form-information .form-conditions .cond-links{
+.form-information .form-conditions .cond-links {
     font-size: 12.2px;
 }
 
@@ -163,14 +250,14 @@ form .account-btn-container .account-btn:hover {
     font-size: 12px;
 }
 
-.form-information .form-login-container{
+.form-information .form-login-container {
     margin-top: 25px;
 
     width: 100%;
     height: 20px;
 
     font-size: 14px;
-    color: rgba(0,0,0,.26);
+    color: rgba(0, 0, 0, .26);
 
     display: flex;
     align-items: center;

@@ -155,7 +155,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SELLER')")
-    @PostMapping("details")
+    @PostMapping("/details")
     public ResponseEntity<ResponseObject> getUserDetail(
             @RequestHeader("Authorization") String authorizationHeader
     ) throws Exception {
@@ -170,7 +170,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SELLER')")
-    @PutMapping("details/{userId}")
+    @PutMapping("/details/{userId}")
     public ResponseEntity<ResponseObject> updateUserDetail(
             @PathVariable String userId,
             @RequestBody UserUpdateDTO userUpdateDTO,
@@ -200,7 +200,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SELLER')")
-    @PutMapping("details/resetPassword/{userId}")
+    @PutMapping("/details/resetPassword/{userId}")
     public ResponseEntity<ResponseObject> changePassword(
             @PathVariable String userId,
             @RequestBody UserResetPasswordDTO userResetPasswordDTO,
@@ -230,7 +230,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SELLER')")
-    @DeleteMapping("details/{userId}")
+    @DeleteMapping("/details/{userId}")
     public ResponseEntity<ResponseObject> deleteUserDetail(
             @PathVariable String userId,
             @RequestHeader("Authorization") String authorizationHeader
