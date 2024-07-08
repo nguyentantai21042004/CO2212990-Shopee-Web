@@ -8,6 +8,39 @@ swiper-container {
     height: 600px;
 }
 
+.swiper-container {
+    width: 100vw;
+    height: 600px;
+
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.swiper-wrapper {
+    position: relative;
+
+    width: 100vw;
+    height: 600px;
+
+    overflow: hidden;
+}
+
+.swiper-slide {
+    display: flex;
+
+    width: 100vw;
+    height: 600px;
+
+    transition: transform 0.3s ease-in-out; // THIS ONE IS FOR TIME FOR CHANGE SLIDE
+}
+
+.slide-item {
+    position: relative; // For Navigation, Pagination,..
+    width: 100vw;
+    height: 600px;
+}
+
 /* ----------------------------------------------------------- */
 /* --------------------------HomePage------------------------- */
 /* ------------------------Phone Number----------------------- */
@@ -52,8 +85,6 @@ swiper-container {
     width: 350px;
     height: 370px;
     padding: 0;
-
-    // background-color: rebeccapurple;
 }
 
 .form .form-container .form-header {
@@ -76,8 +107,6 @@ form .form-group {
     position: relative;
     min-height: 40px;
     border-radius: 2px;
-
-    // background-color: red;
 }
 
 form .form-group input[type="text"] {

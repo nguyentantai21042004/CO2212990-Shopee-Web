@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { register } from 'swiper/element/bundle';
 
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -13,12 +12,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserSignuppageComponent } from './components/user-signuppage/user-signuppage.component';
 import { SignupNavbarComponent } from './components/user-signuppage/signup-navbar/signup-navbar.component';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
+import { SwiperModule } from 'swiper/angular';
 
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { TempComponent } from './components/temp/temp.component';
+import { CarouselComponent } from './components/homepage/carousel/carousel.component';
+import { CategoryComponent } from './components/homepage/category/category.component';
+import { FlashSaleComponent } from './components/homepage/flash-sale/flash-sale.component';
+import { BannerComponent } from './components/homepage/banner/banner.component';
+import { ShopeeMallComponent } from './components/homepage/shopee-mall/shopee-mall.component';
+import { SuggestionComponent } from './components/homepage/suggestion/suggestion.component';
 
-register();
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -30,13 +35,20 @@ register();
     AppComponent,
     UserSignuppageComponent,
     SignupNavbarComponent,
+    TempComponent,
+    CarouselComponent,
+    CategoryComponent,
+    FlashSaleComponent,
+    BannerComponent,
+    ShopeeMallComponent,
+    SuggestionComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    MatDialogModule,
+    SwiperModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

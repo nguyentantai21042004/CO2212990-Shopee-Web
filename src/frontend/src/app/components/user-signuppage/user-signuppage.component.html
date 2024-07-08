@@ -1,423 +1,440 @@
 <app-signup-navbar></app-signup-navbar>
 
-<swiper-container #swiperContainer noSwiping>
-    <!-- This Slide to get phoneNumber -->
-    <swiper-slide noSwiping>
-        <div id="myModalBox" class="modal-box-container"
-            [ngStyle]="{'display': display}"
-            (click)="stopPropagation($event)">
-            <div class="modal-box-content">
-                <div class="contents"> Bạn sẽ nhận được mã xác minh từ một cuộc
-                    gọi thoại đến: {{
-                    this.registerDTO.phoneNumber }}
-                </div>
-
-                <div class="actions">
-                    <div class="modal-button close-button"
-                        (click)="closeDialog()">
-                        TRỞ LẠI
-                    </div>
-                    <div class="modal-button"
-                        (click)="goToNextSlide(swiperContainer)">
-                        GỌI CHO TÔI
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="user-login">
-            <div class="login-container">
-                <div class="form">
-                    <div class="form-container">
-                        <div class="form-header">
-                            Đăng ký
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"
+            [style.transform]="getTransform()">
+            <div class="slide-item">
+                <div id="myModalBox" class="modal-box-container"
+                    [ngStyle]="{'display': display}"
+                    (click)="stopPropagation($event)">
+                    <div class="modal-box-content">
+                        <div class="contents"> Bạn sẽ nhận được mã xác minh từ
+                            một cuộc
+                            gọi thoại đến: {{
+                            this.registerDTO.phoneNumber }}
                         </div>
 
-                        <div class="form-information">
-                            <form #registerForm="ngForm"
-                                [ngClass]="{'invalid': isPhoneNumberValid === false}">
-                                    <div class="form-group">
-                                        <input type="text" id="phoneNumber"
-                                            name="phoneNumber"
-                                            placeholder="Số điện thoại"
-                                            [(ngModel)]="phoneNumber"
-                                            (keyup)="onPhoneNumberChange()"
-                                            required>
+                        <div class="actions">
+                            <div class="modal-button close-button"
+                                (click)="closeDialog()">
+                                TRỞ LẠI
+                            </div>
+                            <div class="modal-button"
+                                (click)="next()">
+                                GỌI CHO TÔI
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                                        <i class="fa-regular fa-circle-check"
-                                            [ngClass]="{'fa-circle-check': isPhoneNumberValid === true}"
-                                            style="color: #4de4b7;"></i>
+                <div class="user-login">
+                    <div class="login-container">
+                        <div class="form">
+                            <div class="form-container">
+                                <div class="form-header">
+                                    Đăng ký
+                                </div>
 
-                                        <div class="error-message"
-                                            *ngIf="isPhoneNumberValid === false">
-                                            Số điện thoại không hợp lệ
+                                <div class="form-information">
+                                    <form #registerForm="ngForm"
+                                        [ngClass]="{'invalid': isPhoneNumberValid === false}">
+                                        <div class="form-group">
+                                            <input type="text" id="phoneNumber"
+                                                name="phoneNumber"
+                                                placeholder="Số điện thoại"
+                                                [(ngModel)]="phoneNumber"
+                                                (keyup)="onPhoneNumberChange()"
+                                                required>
+
+                                            <i
+                                                class="fa-regular fa-circle-check"
+                                                [ngClass]="{'fa-circle-check': isPhoneNumberValid === true}"
+                                                style="color: #4de4b7;"></i>
+
+                                            <div class="error-message"
+                                                *ngIf="isPhoneNumberValid === false">
+                                                Số điện thoại không hợp lệ
+                                            </div>
+                                        </div>
+
+                                        <button id="myBtn" type="submit"
+                                            [ngClass]="{'active': isPhoneNumberValid === true}"
+                                            [disabled]="isPhoneNumberValid === null || !isPhoneNumberValid"
+                                            (click)="openDialog()">
+                                            TIẾP THEO
+                                        </button>
+
+                                        <div class="space">
+                                            <div class="x-space"></div>
+                                            <div class="x-content"
+                                                style="font-size: 14px; color: rgb(185, 185, 185);">
+                                                HOẶC
+                                            </div>
+                                            <div class="x-space"></div>
+                                        </div>
+
+                                        <div class="account-btn-container">
+                                            <div class="account-btn">
+                                                <i class="fa-brands fa-facebook"
+                                                    style="color: #3573de; 
+                                            margin-right: 6px; margin-top: 1px; font-size: 23px;"></i>
+                                                Facebook
+                                            </div>
+                                            <div class="account-btn">
+                                                <i class="fa-brands fa-google"
+                                                    style="color: #b6653a; 
+                                            margin-right: 6px; margin-top: 1px; font-size: 23px;"></i>
+                                                Google
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <div class="form-conditions">
+                                        Bằng việc đăng kí, bạn đã đồng ý với
+                                        Shopee về
+                                        <div class="cond-links">
+                                            <a href="#">Điều khoản dịch vụ</a>
+                                            &
+                                            <a href="#">Chính sách bảo mật</a>
                                         </div>
                                     </div>
 
-                                <button id="myBtn" type="submit"
-                                    [ngClass]="{'active': isPhoneNumberValid === true}"
-                                    [disabled]="isPhoneNumberValid === null || !isPhoneNumberValid"
-                                    (click)="openDialog()">
-                                    TIẾP THEO
+                                    <div class="form-link">
+                                        Bạn đã có tài khoản?
+                                        <a routerLink="/user/login">Đăng
+                                            nhập</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="authen-login">
+                    <div class="authen-container">
+                        <div class="authen-step-container">
+                            <div class="circle-container">
+
+                                <div class="circle-wrapper">
+                                    <div class="circle">
+                                        <div class="number">1</div>
+                                    </div>
+                                    <div class="text">Xác minh số điện
+                                        thoại</div>
+                                </div>
+
+                                <div class="arrow">
+                                    <div class="arrow-shaft"
+                                        style="background-color: grey;"></div>
+                                    <div class="arrow-head"
+                                        style="border-left-color: grey;"></div>
+                                </div>
+
+                                <div class="circle-wrapper">
+                                    <div class="circle"
+                                        style="background-color: white;">
+                                        <div class="number"
+                                            style="color: grey;">2</div>
+                                    </div>
+                                    <div class="text" style="color: grey;">
+                                        Tạo mật khẩu
+                                    </div>
+                                </div>
+
+                                <div class="arrow">
+                                    <div class="arrow-shaft"
+                                        style="background-color: grey;"></div>
+                                    <div class="arrow-head"
+                                        style="border-left-color: grey;"></div>
+                                </div>
+
+                                <div class="circle-wrapper">
+                                    <div class="circle"
+                                        style="background-color: white;">
+                                        <div class="number"
+                                            style="color: grey;">3</div>
+                                    </div>
+                                    <div class="text" style="color: grey;">
+                                        Hoàn thành
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="authen-form">
+                        <div class="authen-form-container">
+                            <div class="left-arrow"
+                                (click)="prev()">
+                                <div class="arrow-head"></div>
+                                <div class="arrow-shaft"></div>
+                            </div>
+
+                            <div class="authen-form-header"
+                                style="font-size: 18px;">
+                                Vui lòng nhập email
+                            </div>
+
+                            <div class="authen-form-content"
+                                style="margin: 20px 0px; line-height: 25px;">
+                                Mã xác minh sẽ được gửi bằng email để xác nhận
+                                số điện
+                                thoại <i class="fa-solid fa-phone-volume"></i>
+                                {{this.phoneNumber}}
+                            </div>
+
+                            <form #registerForm="ngForm"
+                                [ngClass]="{'invalid': isEmailValid === false}"
+                                style="margin-top: 5px;">
+                                <div class="form-group">
+                                    <input type="text" id="email"
+                                        name="email"
+                                        placeholder="Email"
+                                        [(ngModel)]="email"
+                                        (keyup)="onEmailChange()"
+                                        required>
+
+                                    <i class="fa-regular fa-circle-check"
+                                        [ngClass]="{'fa-circle-check': isEmailValid === true}"
+                                        style="color: #4de4b7; top: 35%;"></i>
+
+                                    <div class="error-message"
+                                        *ngIf="isEmailValid === false">
+                                        Định dạng email không hợp lệ
+                                    </div>
+                                </div>
+
+                                <button type="submit"
+                                    [ngClass]="{'active': isEmailValid === true}"
+                                    [disabled]="isEmailValid === null || !isEmailValid"
+                                    (click)="next()">
+                                    XÁC NHẬN
                                 </button>
-
-                                <div class="space">
-                                    <div class="x-space"></div>
-                                    <div class="x-content"
-                                        style="font-size: 14px; color: rgb(185, 185, 185);">
-                                        HOẶC
-                                    </div>
-                                    <div class="x-space"></div>
-                                </div>
-
-                                <div class="account-btn-container">
-                                    <div class="account-btn">
-                                        <i class="fa-brands fa-facebook"
-                                            style="color: #3573de; 
-                                        margin-right: 6px; margin-top: 1px; font-size: 23px;"></i>
-                                        Facebook
-                                    </div>
-                                    <div class="account-btn">
-                                        <i class="fa-brands fa-google"
-                                            style="color: #b6653a; 
-                                        margin-right: 6px; margin-top: 1px; font-size: 23px;"></i>
-                                        Google
-                                    </div>
-                                </div>
                             </form>
 
-                            <div class="form-conditions">
-                                Bằng việc đăng kí, bạn đã đồng ý với Shopee về
-                                <div class="cond-links">
-                                    <a href="#">Điều khoản dịch vụ</a>
-                                    &
-                                    <a href="#">Chính sách bảo mật</a>
+                            <div class="authen-form-warning"
+                                style="margin: 20px 0px; line-height: 20px;">
+                                Nếu bạn chưa có email, hãy tạo tài khoản trước
+                                tiên <a
+                                    href="#"
+                                    style="text-decoration: none; color: #ee4d2d;">tại
+                                    đây</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="authen-login">
+                    <div class="authen-container">
+                        <div class="authen-step-container">
+                            <div class="circle-container">
+
+                                <div class="circle-wrapper">
+                                    <div class="circle">
+                                        <div class="number">1</div>
+                                    </div>
+                                    <div class="text">Xác minh số điện
+                                        thoại</div>
+                                </div>
+
+                                <div class="arrow">
+                                    <div class="arrow-shaft"></div>
+                                    <div class="arrow-head"></div>
+                                </div>
+
+                                <div class="circle-wrapper">
+                                    <div class="circle">
+                                        <div class="number">2</div>
+                                    </div>
+                                    <div class="text">
+                                        Tạo mật khẩu
+                                    </div>
+                                </div>
+
+                                <div class="arrow">
+                                    <div class="arrow-shaft"
+                                        style="background-color: grey;"></div>
+                                    <div class="arrow-head"
+                                        style="border-left-color: grey;"></div>
+                                </div>
+
+                                <div class="circle-wrapper">
+                                    <div class="circle"
+                                        style="background-color: white;">
+                                        <div class="number"
+                                            style="color: grey;">3</div>
+                                    </div>
+                                    <div class="text" style="color: grey;">
+                                        Hoàn thành
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="form-link">
-                                Bạn đã có tài khoản?
-                                <a routerLink="/user/login">Đăng nhập</a>
-                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
-        </div>
-    </swiper-slide>
-
-    <!-- This Slide to get Email -->
-    <swiper-slide class="email-authen" noSwiping>
-        <div class="authen-login">
-            <div class="authen-container">
-                <div class="authen-step-container">
-                    <div class="circle-container">
-
-                        <div class="circle-wrapper">
-                            <div class="circle">
-                                <div class="number">1</div>
+                    <div class="authen-form">
+                        <div class="authen-form-container">
+                            <div class="left-arrow"
+                                (click)="prev()">
+                                <div class="arrow-head"></div>
+                                <div class="arrow-shaft"></div>
                             </div>
-                            <div class="text">Xác minh số điện thoại</div>
-                        </div>
 
-                        <div class="arrow">
-                            <div class="arrow-shaft"
-                                style="background-color: grey;"></div>
-                            <div class="arrow-head"
-                                style="border-left-color: grey;"></div>
-                        </div>
-
-                        <div class="circle-wrapper">
-                            <div class="circle"
-                                style="background-color: white;">
-                                <div class="number" style="color: grey;">2</div>
+                            <div class="authen-form-header"
+                                style="font-size: 18px;">
+                                Thiết Lập Mật Khẩu
                             </div>
-                            <div class="text" style="color: grey;">
-                                Tạo mật khẩu
+
+                            <div class="authen-form-content"
+                                style="margin: 20px 0px; line-height: 20px; padding: 0px 50px;">
+                                Bước cuối! Thiết lập mật khẩu để hoàn tất việc
+                                đăng ký.
                             </div>
-                        </div>
 
-                        <div class="arrow">
-                            <div class="arrow-shaft"
-                                style="background-color: grey;"></div>
-                            <div class="arrow-head"
-                                style="border-left-color: grey;"></div>
-                        </div>
+                            <form #registerForm="ngForm"
+                                [ngClass]="{'invalid': isPasswordValid === false}"
+                                style="margin-top: 5px; padding: 0px 40px;">
+                                <div class="form-group">
+                                    <input type="text" id="password"
+                                        name="password"
+                                        placeholder="Mật khẩu"
+                                        [(ngModel)]="password"
+                                        (keyup)="onPasswordChange()"
+                                        required>
 
-                        <div class="circle-wrapper">
-                            <div class="circle"
-                                style="background-color: white;">
-                                <div class="number" style="color: grey;">3</div>
-                            </div>
-                            <div class="text" style="color: grey;">
-                                Hoàn thành
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                    <i class="fa-regular fa-circle-check"
+                                        [ngClass]="{'fa-circle-check': isPasswordValid === true}"
+                                        style="color: #4de4b7; top: 10.7%;"></i>
 
-            <div class="authen-form">
-                <div class="authen-form-container">
-                    <div class="left-arrow"
-                        (click)="goToPrevSlide(swiperContainer)">
-                        <div class="arrow-head"></div>
-                        <div class="arrow-shaft"></div>
-                    </div>
+                                    <div class="error-message password-error"
+                                        style="background-color: #fff; height: 100px;">
+                                        <div class="err"
+                                            [ngClass]="{'error-on': isAtLeastLowercaseCharacter === false}">
+                                            Ít nhất một kí tự viết thường
+                                        </div>
+                                        <div class="err"
+                                            [ngClass]="{'error-on': isAtLeastUppercaseCharacter === false}">
+                                            Ít nhất một kí tự viết hoa
+                                        </div>
+                                        <div class="err"
+                                            [ngClass]="{'error-on': isEnoughCharacters === false}">
+                                            8-16 kí tự
+                                        </div>
+                                        <div class="err"
+                                            [ngClass]="{'error-on': isJustPopularCharacters === false}">
+                                            Chỉ các chữ cái, số và kí tự phổ
+                                            biến
+                                            mới có thể được sử dụng
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="authen-form-header"
-                        style="font-size: 18px;">
-                        Vui lòng nhập email
-                    </div>
+                                <button type="submit"
+                                    [ngClass]="{'active': isPasswordValid === true}"
+                                    [disabled]="isPasswordValid === null || !isPasswordValid"
+                                    (click)="next()">
+                                    ĐĂNG KÝ
+                                </button>
 
-                    <div class="authen-form-content"
-                        style="margin: 20px 0px; line-height: 25px;">
-                        Mã xác minh sẽ được gửi bằng email để xác nhận số điện
-                        thoại <i class="fa-solid fa-phone-volume"></i>
-                        {{this.phoneNumber}}
-                    </div>
+                                <div style="padding-bottom: 25px;"></div>
 
-                    <form #registerForm="ngForm"
-                        [ngClass]="{'invalid': isEmailValid === false}"
-                        style="margin-top: 5px;">
-                        <div class="form-group">
-                            <input type="text" id="email"
-                                name="email"
-                                placeholder="Email"
-                                [(ngModel)]="email"
-                                (keyup)="onEmailChange()"
-                                required>
-
-                            <i class="fa-regular fa-circle-check"
-                                [ngClass]="{'fa-circle-check': isEmailValid === true}"
-                                style="color: #4de4b7; top: 35%;"></i>
-
-                            <div class="error-message"
-                                *ngIf="isEmailValid === false">
-                                Định dạng email không hợp lệ
-                            </div>
-                        </div>
-
-                        <button type="submit"
-                            [ngClass]="{'active': isEmailValid === true}"
-                            [disabled]="isEmailValid === null || !isEmailValid"
-                            (click)="goToNextSlide(swiperContainer)">
-                            XÁC NHẬN
-                        </button>
-                    </form>
-
-                    <div class="authen-form-warning"
-                        style="margin: 20px 0px; line-height: 20px;">
-                        Nếu bạn chưa có email, hãy tạo tài khoản trước tiên <a
-                            href="#"
-                            style="text-decoration: none; color: #ee4d2d;">tại
-                            đây</a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </swiper-slide>
-
-    <!-- This Slide to get Password -->
-    <swiper-slide class="password-authen" noSwiping>
-        <div class="authen-login">
-            <div class="authen-container">
-                <div class="authen-step-container">
-                    <div class="circle-container">
-
-                        <div class="circle-wrapper">
-                            <div class="circle">
-                                <div class="number">1</div>
-                            </div>
-                            <div class="text">Xác minh số điện thoại</div>
-                        </div>
-
-                        <div class="arrow">
-                            <div class="arrow-shaft"></div>
-                            <div class="arrow-head"></div>
-                        </div>
-
-                        <div class="circle-wrapper">
-                            <div class="circle">
-                                <div class="number">2</div>
-                            </div>
-                            <div class="text">
-                                Tạo mật khẩu
-                            </div>
-                        </div>
-
-                        <div class="arrow">
-                            <div class="arrow-shaft"
-                                style="background-color: grey;"></div>
-                            <div class="arrow-head"
-                                style="border-left-color: grey;"></div>
-                        </div>
-
-                        <div class="circle-wrapper">
-                            <div class="circle"
-                                style="background-color: white;">
-                                <div class="number" style="color: grey;">3</div>
-                            </div>
-                            <div class="text" style="color: grey;">
-                                Hoàn thành
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="authen-form">
-                <div class="authen-form-container">
-                    <div class="left-arrow"
-                        (click)="goToPrevSlide(swiperContainer)">
-                        <div class="arrow-head"></div>
-                        <div class="arrow-shaft"></div>
-                    </div>
-
-                    <div class="authen-form-header"
-                        style="font-size: 18px;">
-                        Thiết Lập Mật Khẩu
-                    </div>
-
-                    <div class="authen-form-content"
-                        style="margin: 20px 0px; line-height: 20px; padding: 0px 50px;">
-                        Bước cuối! Thiết lập mật khẩu để hoàn tất việc đăng ký.
-                    </div>
-
-                    <form #registerForm="ngForm"
-                        [ngClass]="{'invalid': isPasswordValid === false}"
-                        style="margin-top: 5px; padding: 0px 40px;">
-                        <div class="form-group">
-                            <input type="text" id="password"
-                                name="password"
-                                placeholder="Mật khẩu"
-                                [(ngModel)]="password"
-                                (keyup)="onPasswordChange()"
-                                required>
-
-                            <i class="fa-regular fa-circle-check"
-                                [ngClass]="{'fa-circle-check': isPasswordValid === true}"
-                                style="color: #4de4b7; top: 10.7%;"></i>
-
-                            <div class="error-message password-error"
-                                style="background-color: #fff; height: 100px;">
-                                <div class="err"
-                                    [ngClass]="{'error-on': isAtLeastLowercaseCharacter === false}">
-                                    Ít nhất một kí tự viết thường
+            <div class="slide-item">
+                <div class="authen-login">
+                    <div class="authen-container">
+                        <div class="authen-step-container">
+                            <div class="circle-container">
+                                <div class="circle-wrapper">
+                                    <div class="circle">
+                                        <div class="number">1</div>
+                                    </div>
+                                    <div class="text">Xác minh số điện
+                                        thoại</div>
                                 </div>
-                                <div class="err"
-                                    [ngClass]="{'error-on': isAtLeastUppercaseCharacter === false}">
-                                    Ít nhất một kí tự viết hoa
+
+                                <div class="arrow">
+                                    <div class="arrow-shaft"></div>
+                                    <div class="arrow-head"></div>
                                 </div>
-                                <div class="err"
-                                    [ngClass]="{'error-on': isEnoughCharacters === false}">
-                                    8-16 kí tự
+
+                                <div class="circle-wrapper">
+                                    <div class="circle">
+                                        <div class="number">2</div>
+                                    </div>
+                                    <div class="text">
+                                        Tạo mật khẩu
+                                    </div>
                                 </div>
-                                <div class="err"
-                                    [ngClass]="{'error-on': isJustPopularCharacters === false}">
-                                    Chỉ các chữ cái, số và kí tự phổ biến
-                                    mới có thể được sử dụng
+
+                                <div class="arrow">
+                                    <div class="arrow-shaft"></div>
+                                    <div class="arrow-head"></div>
+                                </div>
+
+                                <div class="circle-wrapper">
+                                    <div class="circle">
+                                        <div class="number">3</div>
+                                    </div>
+                                    <div class="text">
+                                        Hoàn thành
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <button type="submit"
-                            [ngClass]="{'active': isPasswordValid === true}"
-                            [disabled]="isPasswordValid === null || !isPasswordValid"
-                            (click)="goToNextSlide(swiperContainer)">
-                            ĐĂNG KÝ
-                        </button>
+                    <div class="success-form">
+                        <div class="success-form-container">
 
-                        <div style="padding-bottom: 25px;"></div>
+                            <div class="success-form-header"
+                                style="font-size: 18px;">
+                                Đăng ký thành công!
+                            </div>
 
-                    </form>
+                            <div class="success-form-icon"
+                                style="margin-top: 20px;">
+                                <i
+                                    class="fa-regular fa-circle-check success-icon"></i>
+                            </div>
+
+                            <div class="success-form-content"
+                                style="margin: 20px 0px; line-height: 25px; padding: 0 45px;">
+                                <div class="first-line">
+                                    Bạn đã tạo thành công tài khoản Shopee với
+                                    số
+                                    <span style="color: #ee4d2d;">{{
+                                        this.registerDTO.phoneNumber }}</span>
+                                </div>
+
+                                <div class="second-line"
+                                    style="margin-top: 20px; padding: 0 5px;">
+                                    Bạn sẽ được chuyển hướng đến Shopee trong
+                                    {{this.countdownTimer}} giây
+                                </div>
+                            </div>
+
+                            <button style="padding: 0 45px;"
+                                (click)="navigateToOtherComponent()">
+                                Quay lại Shopee
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </swiper-slide>
+    </div>
+</div>
 
-    <!-- This Slide is to Success -->
-    <swiper-slide class="success-authen" noSwiping>
-        <div class="authen-login">
-            <div class="authen-container">
-                <div class="authen-step-container">
-                    <div class="circle-container">
-                        <div class="circle-wrapper">
-                            <div class="circle">
-                                <div class="number">1</div>
-                            </div>
-                            <div class="text">Xác minh số điện thoại</div>
-                        </div>
-
-                        <div class="arrow">
-                            <div class="arrow-shaft"></div>
-                            <div class="arrow-head"></div>
-                        </div>
-
-                        <div class="circle-wrapper">
-                            <div class="circle">
-                                <div class="number">2</div>
-                            </div>
-                            <div class="text">
-                                Tạo mật khẩu
-                            </div>
-                        </div>
-
-                        <div class="arrow">
-                            <div class="arrow-shaft"></div>
-                            <div class="arrow-head"></div>
-                        </div>
-
-                        <div class="circle-wrapper">
-                            <div class="circle">
-                                <div class="number">3</div>
-                            </div>
-                            <div class="text">
-                                Hoàn thành
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="success-form">
-                <div class="success-form-container">
-
-                    <div class="success-form-header"
-                        style="font-size: 18px;">
-                        Đăng ký thành công!
-                    </div>
-
-                    <div class="success-form-icon" style="margin-top: 20px;">
-                        <i class="fa-regular fa-circle-check success-icon"></i>
-                    </div>
-
-                    <div class="success-form-content"
-                        style="margin: 20px 0px; line-height: 25px; padding: 0 45px;">
-                        <div class="first-line">
-                            Bạn đã tạo thành công tài khoản Shopee với số
-                            <span style="color: #ee4d2d;">{{
-                                this.registerDTO.phoneNumber }}</span>
-                        </div>
-
-                        <div class="second-line"
-                            style="margin-top: 20px; padding: 0 5px;">
-                            Bạn sẽ được chuyển hướng đến Shopee trong
-                            {{this.countdownTimer}} giây
-                        </div>
-                    </div>
-
-                    <button style="padding: 0 45px;"
-                        (click)="navigateToOtherComponent()">
-                        Quay lại Shopee
-                    </button>
-                </div>
-            </div>
-        </div>
-    </swiper-slide>
-</swiper-container>
 <app-footer></app-footer>
 
 <link rel="stylesheet"

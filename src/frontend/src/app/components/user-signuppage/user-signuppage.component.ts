@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterDTO } from 'src/app/dtos/register.dtos';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
 import { ApiResponse } from 'src/app/responses/api.response';
 
@@ -13,6 +13,46 @@ import { ApiResponse } from 'src/app/responses/api.response';
 })
 export class UserSignuppageComponent implements OnInit {
   @ViewChild('registerForm') registerForm!: NgForm;
+
+  /* This one is for Swiper */
+  currentIndex = 0;
+  startX: number = 0;
+  moveX: number = 0;
+  dragging: boolean = false;
+  slideWidth: number = window.innerWidth;
+  @HostListener('window:resize')
+  onWindowResize() {
+    this.updateSlideWidth();
+  }
+
+  updateSlideWidth() {
+    this.slideWidth = window.innerWidth;
+  }
+
+  prev() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    }
+  }
+
+  next() {
+    if (this.currentIndex < 4 - 1) {
+      this.currentIndex++;
+    }
+  }
+
+  getTransform() {
+    return `translateX(-${this.currentIndex * this.slideWidth + this.moveX}px)`;
+  }
+
+  goToSlide(index: number) {
+    this.currentIndex = index;
+  }
+
+  ngOnInit(): void {
+    this.updateSlideWidth();
+    // this.openDialog();
+  }
 
   isPhoneNumberValid: boolean | null = null;
   isEmailValid: boolean | null = null;
@@ -59,9 +99,6 @@ export class UserSignuppageComponent implements OnInit {
     this.isJustPopularCharacters = null;
   }
 
-  ngOnInit(): void {
-    // this.openDialog();
-  }
 
   isValidPhoneNumber(phone: string): boolean {
     const phoneRegex = /^(0|\+84)(3|5|7|8|9)\d{8}$/;

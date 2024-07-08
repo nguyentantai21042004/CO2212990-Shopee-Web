@@ -1,0 +1,30 @@
+<section class="product">
+    <div class="container-fluid swiper-container">
+        <div class="slider-wrap swiper-wrapper"
+            (mousedown)="onMouseDown($event)"
+            (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp()">
+
+            <div class="slider-main swiper-slide"
+                [style.transform]="getTransform()">
+                <div class="item" *ngFor="let item of items">
+                    <div class="text">{{ item }}</div>
+                </div>
+            </div>
+
+            <div class="button-area swiper-button">
+                <button type="button" class="prev"
+                    (click)="prev()">Prev</button>
+                <button type="button" class="next"
+                    (click)="next()">Next</button>
+            </div>
+
+            <div class="pagination swiper-pagination">
+                <span *ngFor="let item of items; let i = index"
+                    [class.active]="currentIndex === i"
+                    (click)="goToSlide(i)">
+                </span>
+            </div>
+
+        </div>
+    </div>
+</section>

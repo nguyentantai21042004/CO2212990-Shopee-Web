@@ -1,0 +1,229 @@
+.carousel-container {
+    padding: 0;
+
+    height: 380px;
+    width: 100% !important;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fff;
+}
+
+/* --------------------------------------------- */
+/* -------------advertise-container------------- */
+/* --------------------------------------------- */
+.advertise-container {
+    margin-top: 30px;
+    height: 235px;
+    width: 1200px;
+    padding: 0;
+
+    display: flex;
+    justify-content: space-between;
+
+    overflow: hidden;
+    background-color: aqua;
+}
+
+
+/* ----------------swiper-container------------- */
+.advertise-container .swiper-container {
+    position: relative;
+
+    height: 235px;
+    width: 800px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.swiper-container .swiper-wrapper {
+    display: flex;
+    transition: transform 0.35s ease-in-out;
+}
+
+.swiper-wrapper .swiper-slide {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide .slide-item {
+    height: 235px;
+    width: 800px;
+    border-radius: 2px;
+
+    overflow: hidden;
+}
+
+.swiper-slide .slide-item img {
+    width: 800px;
+    height: auto;
+
+    object-fit: cover;
+}
+
+.swiper-button .prev,
+.swiper-button .next {
+    opacity: 0;
+
+    position: absolute;
+    display: flex;
+    align-items: center;
+
+    height: 60px;
+    width: 25px;
+    font-size: 20px;
+
+    top: 50%;
+    transition: opacity 0.2s ease-in-out;
+    transform: translateY(-50%);
+
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.18);
+}
+
+.swiper-button .prev {
+    left: 0px;
+    justify-content: left;
+}
+
+.swiper-button .next {
+    right: 0px;
+    justify-content: right;
+}
+
+.swiper-button .prev:hover,
+.swiper-button .next:hover {
+    background-color: rgba(0, 0, 0, 0.36);
+}
+
+.advertise-container .swiper-container:hover .swiper-button .prev,
+.advertise-container .swiper-container:hover .swiper-button .next {
+    opacity: 1;
+}
+
+.swiper-pagination {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 7px;
+}
+
+.swiper-pagination span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: #c1c1c1;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.swiper-pagination span.active {
+    background-color: #ee4d2d;
+}
+
+/* ----------------banner-container------------- */
+.advertise-container .banner-container {
+    height: 235px;
+    width: 395px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.banner-container .banner-item {
+    height: 115px;
+    width: 395px;
+    border-radius: 2px;
+
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.banner-container .banner-item img {
+    width: 395px;
+    height: auto;
+
+    object-fit: cover;
+}
+
+
+/* --------------------------------------------- */
+/* ----------------banner-container------------- */
+/* --------------------------------------------- */
+.indicator-container {
+    height: 115px;
+    width: 1200px;
+
+    display: flex;
+    justify-content: space-between;
+
+    overflow: hidden;
+}
+
+.item-container {
+    margin-top: 7px;
+    height: 108px;
+    width: 150px;
+    padding: 0px 25px;
+
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-container:hover {
+    margin-top: 6px;
+}
+
+.item-container .item-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-container .item-content .image-container {
+    height: 45px;
+    width: 45px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-container .item-content img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+
+    margin-bottom: 4px;
+}
+
+.item-container .item-content .content-container {
+    margin-top: 3px;
+    height: 30px;
+
+    text-align: center;
+    font-size: 13px;
+    line-height: 13px;
+
+    overflow: hidden;
+}

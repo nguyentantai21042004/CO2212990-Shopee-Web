@@ -1,0 +1,134 @@
+<div class="carousel-container">
+
+    <div class="advertise-container">
+        <!-- SWIPER -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper" [style.transform]="getTransform()">
+                <div class="swiper-slide" *ngFor="let slide of slides">
+                    <div class="slide-item">
+                        <img [src]="slide" alt="Slide Image">
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button">
+                <div class="prev" (click)="prev()">
+                    <i class="fa-solid fa-chevron-left"
+                        style="margin-left: 3px;"></i>
+                </div>
+                <div class="next" (click)="next()">
+                    <i class="fa-solid fa-chevron-right"
+                        style="margin-right: 3px;"></i>
+                </div>
+            </div>
+            <div class="swiper-pagination">
+                <span *ngFor="let slide of slides; let i = index"
+                    [class.active]="currentIndex === i"
+                    (click)="goToSlide(i)">
+                </span>
+            </div>
+        </div>
+
+        <!-- BANNER -->
+        <div class="banner-container">
+            <div class="banner-item">
+                <img src="../../../../assets/carousel/bannerItem01.jpg"
+                    alt="Banner Item">
+            </div>
+            <div class="banner-item">
+                <img src="../../../../assets/carousel/bannerItem02.jpg"
+                    alt="Banner Item">
+            </div>
+        </div>
+    </div>
+
+    <!-- BUTTON -->
+    <div class="indicator-container">
+        <!-- 1st icon -->
+        <div class="item-container" style="padding:0px 25px;">
+            <div class="item-content">
+                <div class="image-container">
+                    <img src="../../../../assets/carousel/icons/icon01.png" alt>
+                </div>
+                <div class="content-container">
+                    Voucher Giảm Đến 1 Triệu
+                </div>
+            </div>
+        </div>
+        <!-- 2nd icon -->
+        <div class="item-container">
+            <div class="item-content">
+                <div class="image-container">
+                    <img src="../../../../assets/carousel/icons/icon02.png" alt>
+                </div>
+                <div class="content-container">
+                    Miễn Phí Ship - Có Shopee
+                </div>
+            </div>
+        </div>
+        <div class="item-container">
+            <div class="item-content">
+                <div class="image-container">
+                    <img src="../../../../assets/carousel/icons/icon03.png" alt>
+                </div>
+                <div class="content-container">
+                    Khung Giờ Săn Sale
+                </div>
+            </div>
+        </div>
+        <div class="item-container">
+            <div class="item-content">
+                <div class="image-container">
+                    <img src="../../../../assets/carousel/icons/icon04.png" alt>
+                </div>
+                <div class="content-container">
+                    Mã Giảm Giá
+                </div>
+            </div>
+        </div>
+        <div class="item-container">
+            <div class="item-content">
+                <div class="image-container">
+                    <img src="../../../../assets/carousel/icons/icon05.png" alt>
+                </div>
+                <div class="content-container">
+                    Shopee Siêu Rẻ
+                </div>
+            </div>
+        </div>
+        <div class="item-container">
+            <div class="item-content">
+                <div class="image-container">
+                    <img src="../../../../assets/carousel/icons/icon06.png" alt>
+                </div>
+                <div class="content-container">
+                    Shopee Style Voucher 40%
+                </div>
+            </div>
+        </div>
+        <div class="item-container">
+            <div class="item-content">
+                <div class="image-container">
+                    <img src="../../../../assets/carousel/icons/icon07.png" alt>
+                </div>
+                <div class="content-container">
+                    Hàng Quốc Tế
+                </div>
+            </div>
+        </div>
+        <div class="item-container" style="padding: 0px 25px;">
+            <div class="item-content">
+                <div class="image-container">
+                    <img src="../../../../assets/carousel/icons/icon08.png" alt>
+                </div>
+                <div class="content-container">
+                    Nạp Thẻ, Dịch Vụ & Vé Máy Bay
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
