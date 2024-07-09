@@ -25,7 +25,6 @@
     justify-content: space-between;
 
     overflow: hidden;
-    background-color: aqua;
 }
 
 
@@ -42,7 +41,7 @@
 
 .swiper-container .swiper-wrapper {
     display: flex;
-    transition: transform 0.35s ease-in-out;
+    transition: transform 0.35s ease-in-out; // SWIPER
 }
 
 .swiper-wrapper .swiper-slide {
@@ -57,6 +56,7 @@
     width: 800px;
     border-radius: 2px;
 
+    cursor: pointer;
     overflow: hidden;
 }
 
