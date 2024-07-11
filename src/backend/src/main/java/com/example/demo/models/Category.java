@@ -16,6 +16,8 @@ import javax.persistence.Entity;
 @Builder
 @Document(collection = "categories")
 public class Category extends BaseEntity{
+    public static final int MAXIMUM_IMAGES_PER_CATEGORY = 1;
+
     @Id
     private String id;
 
@@ -28,4 +30,6 @@ public class Category extends BaseEntity{
     private String parentId;
 
     private String status;
+
+    private String imageUrl;
 }
