@@ -2,7 +2,7 @@
     margin-top: 20px;
     padding: 0;
 
-    height: 500px;
+    // height: 500px;
     width: 1200px;
 
     overflow: hidden;
@@ -13,11 +13,146 @@
     height: 60px;
     width: 1200px;
 
-    background-color: beige;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    user-select: none;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19.2px;
+    color: rgb(238, 77, 45);
+
+    border-bottom: 4px solid rgb(238, 77, 45);
+    background-color: #fff;
 }
 
+
+.content-container {
+    width: 1200px;
+    height: 2500px;
+
+    background-color: aliceblue;
+}
+
+.content-container .content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-row-container {
+    width: 1200px;
+    height: 310px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: aquamarine;
+}
 
 .item-container {
-    height: 250px;
-    width: 1200px;
+    width: 200px;
+    height: 308px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid black;
+    background-color: antiquewhite;
 }
+
+.item-container .item-wrapper {
+    position: relative;
+    width: 188px;
+    height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    background-color: aqua;
+}
+
+.item-container .item-wrapper:hover {
+    margin-top: -5px;
+    border: 1.3px solid rgb(238, 77, 45);
+}
+
+.item-container .item-wrapper:hover::after {
+    content: 'Tìm sản phẩm tương tự';
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+
+    width: 188px;
+    height: 30px;
+    border: 1.3px solid rgb(238, 77, 45);
+    background-color: rgb(238, 77, 45);
+}
+
+.item-image {
+    width: 188px;
+    height: 188px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+    // background-color: antiquewhite;
+}
+
+.item-content {
+    padding: 8px;
+    width: 188px;
+    height: 112px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: brown;
+}
+
+.item-content .desc {
+    width: 172px;
+    height: 44px;
+    padding: 1px 5px;
+
+    font-size: 14px;
+    line-height: 20px;
+
+    overflow: hidden;
+    background-color: azure;
+}
+
+.item-content .tag {
+    margin-top: 4px;
+    width: 172px;
+    height: 20px;
+    background-color: rgb(6, 246, 246);
+}
+
+.item-content .quantity {
+    margin-top: 8px;
+    width: 172px;
+    height: 20px;
+    background-color: rgb(6, 246, 246);
+}
+
