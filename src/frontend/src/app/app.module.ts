@@ -65,6 +65,6 @@ import { SellerHomepageComponent } from './components/seller-homepage/seller-hom
   providers: [
     UserService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [UserAccountComponent]
 })
 export class AppModule { }

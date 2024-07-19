@@ -3,7 +3,7 @@
     width: 100vw;
     display: flex;
 
-    background-color: bisque;
+    background-color: #f5f5f5;
 }
 
 .container {
@@ -19,37 +19,140 @@
     display: flex;
 
     overflow: hidden;
-    background-color: aqua;
 }
 
 .account-container {
     width: 180px;
     height: 570px;
-
-    background-color: brown;
 }
 
+// LEFT SIDEBAR
+
+// Image
 .account-container .account-profile {
     width: 180px;
     height: 80px;
 
-    background-color: aliceblue;
+    padding: 5px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    border-bottom: 0.5px solid rgb(136, 136, 136);
 }
 
+.account-profile .account-image {
+    height: 50px;
+    width: 50px;
+
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-image img {
+    height: 50px;
+    width: 50px;
+
+    object-fit: cover;
+    border-radius: 25px;
+    border: 0.5px solid;
+}
+
+.account-profile .account-content {
+    margin-left: 15px;
+}
+
+.account-content .username {
+    color: rgb(51, 51, 51);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16.8px;
+
+    margin-bottom: 5px;
+}
+
+.account-content .action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    color: rgb(136, 136, 136);
+    font-size: 14px;
+    line-height: 16.8px;
+}
+
+// User profile
 .account-container .profile-setting {
     width: 180px;
     height: 250px;
 
-    background-color: rgb(4, 129, 238);
+    padding: 5px;
 }
 
+.profile-setting .profile-header {
+    display: flex;
+    align-items: center;
+
+    font-size: 14px;
+    font-weight: 600;
+    height: 20px;
+}
+
+.profile-setting .menu {
+    list-style-type: none;
+    padding: 0px 0px 3px 27px;
+}
+
+.profile-setting .menu .menu-item {
+    font-size: 14px;
+    line-height: 16.8px;
+
+    cursor: pointer;
+    user-select: none;
+    padding: 9px 0px;
+
+    color: rgba(0, 0, 0, 0.65);
+    text-decoration: none;
+    display: block;
+}
+
+.profile-setting .profile-header:hover,
+.profile-setting .menu .menu-item:hover {
+    color: rgb(238, 77, 45);
+}
+
+// Other profile
 .account-container .other-setting {
     width: 180px;
     height: 240px;
 
-    background-color: rgb(255, 0, 140);
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
+.order-container,
+.noti-container,
+.voucher-container,
+.shopee-container {
+    height: 35px;
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.order-container:hover,
+.noti-container:hover,
+.voucher-container:hover,
+.shopee-container:hover {
+    color: rgb(238, 77, 45);
+}
 
 .content-container {
     margin-left: 30px;
@@ -58,14 +161,34 @@
 
     padding: 0 30px 10px;
 
-    background-color: chocolate;
+    background-color: #fff;
 }
 
+
+// Header
 .content-container .header-content {
     height: 80px;
     width: 930px;
 
-    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border-bottom: 0.5px solid #f5f5f5;
+}
+
+.header-content .title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.header-content .content {
+    margin-top: 3px;
+
+    font-size: 14px;
+    line-height: 17px;
+    color: rgb(85, 85, 85);
 }
 
 
@@ -74,7 +197,6 @@
     width: 930px;
 
     display: flex;
-    background-color: rgb(47, 0, 255);
 }
 
 .form-content .form-container {
@@ -84,9 +206,167 @@
     background-color: bisque;
 }
 
+form {
+    width: 600px;
+    height: 450px;
+
+    background-color: rebeccapurple;
+}
+
+.form-group {
+    width: 600px;
+    height: 50px;
+    margin-bottom: 15px;
+
+    display: flex;
+    justify-content: left;
+
+    overflow: hidden;
+}
+
+.form-group label {
+    display: block;
+    width: 200px;
+    height: 50px;
+
+    padding-right: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.form-group input[type="text"],
+.form-group select {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 5px;
+    border: 1px solid #f5f5f5;
+    border-radius: 3px;
+}
+
+.form-group small {
+    display: block;
+    color: #999;
+}
+
+.form-group a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-group a:hover {
+    text-decoration: underline;
+}
+
+.form-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+.form-group select {
+    width: calc(33.33% - 10px);
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.form-group select:last-child {
+    margin-right: 0;
+}
+
+.save-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #ff5722;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    background-color: #e64a19;
+}
+
+
+// Image Container
 .form-content .image-container {
+    margin-top: 20px;
+
     width: 280px;
     height: 230px;
 
-    background-color: rgb(255, 140, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-left: 0.5px solid #f5f5f5;
+}
+
+.image-container .image-wrapper {
+    width: 117px;
+    height: 115px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container .image-wrapper img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+
+    cursor: pointer;
+    border-radius: 50px;
+    border: 0.5px solid black;
+}
+
+.image-container .content-wrapper {
+    width: 117px;
+    height: 115px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-wrapper .button {
+    width: 100px;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.03) 0px 1px 1px 0px;
+}
+
+.content-wrapper .button:hover {
+    background-color: #f5f5f5;
+}
+
+.content-wrapper .content {
+    margin-top: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 175px;
+    height: 40px;
+    color: #999;
+    font-size: 14px;
+    line-height: 20px;
 }
