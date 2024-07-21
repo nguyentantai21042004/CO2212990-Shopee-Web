@@ -27,6 +27,7 @@ import { UserAccountComponent } from './components/user-account/user-account.com
 import { UserAccountProfileComponent } from './components/user-account/user-account-profile/user-account-profile.component';
 import { SellerNavbarComponent } from './components/seller-navbar/seller-navbar.component';
 import { SellerHomepageComponent } from './components/seller-homepage/seller-homepage.component';
+import { CategoryPageComponent } from './components/category-page/category-page.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { SellerHomepageComponent } from './components/seller-homepage/seller-hom
     UserAccountProfileComponent,
     SellerNavbarComponent,
     SellerHomepageComponent,
+    CategoryPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +67,6 @@ import { SellerHomepageComponent } from './components/seller-homepage/seller-hom
   providers: [
     UserService
   ],
-  bootstrap: [UserAccountComponent]
+  bootstrap: [CategoryPageComponent]
 })
 export class AppModule { }

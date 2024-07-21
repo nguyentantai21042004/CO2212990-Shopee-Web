@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginDTO } from 'src/app/dtos/login.dtos';
 import { ApiResponse } from 'src/app/responses/api.response';
+import { UserResponse } from 'src/app/responses/user.response';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -20,6 +22,7 @@ export class UserLoginpageComponent {
   phoneNumber: string = '';
   password: string = '';
   email: string = '';
+  userResponse?: UserResponse;
 
   loginDTO: LoginDTO = {
     phoneNumber: '',
@@ -77,10 +80,22 @@ export class UserLoginpageComponent {
         this.userService.getUserDetail(token).subscribe({
           next: (apiResponse2: ApiResponse) => {
             debugger
-            
+
+            this.userResponse = {
+              ...apiResponse2.data
+            };
+            this.userService.saveUserResponseToLocalStorage(this.userResponse);
+
+            // ---------------------------------------------------------
+            // THIS ONE IS FOR NAVIGATE DIFFERENT ROLE TO DIFFERENT PAGE
+            // ---------------------------------------------------------
+            this.router.navigate(['']);
+          },
+          complete: () => { },
+          error: (error: HttpErrorResponse) => {
+            console.log(error?.error?.message ?? '');
           }
         })
-
       }
     })
   }
