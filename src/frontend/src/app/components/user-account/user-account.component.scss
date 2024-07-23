@@ -1,0 +1,15 @@
+/* Ensure the container takes up the full screen height */
+.user-account-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+  }
+  
+  /* Example styling for the router-outlet */
+  .router-outlet-container {
+    flex: 1; /* Takes up remaining space in the flex container */
+    overflow: auto; /* Allow scrolling if content overflows */
+    background-color: #f9f9f9; /* Optional background color */
+    padding: 20px; /* Optional padding */
+  }
+  

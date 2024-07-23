@@ -55,13 +55,11 @@ export class UserService {
     }
 
     getUserDetail(token: string): Observable<ApiResponse> {
-        return this.http.post<ApiResponse>(this.apiUserDetail,
-            {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                })
-            }
-        )
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        });
+
+        return this.http.post<ApiResponse>(this.apiUserDetail, {}, { headers });
     }
 }

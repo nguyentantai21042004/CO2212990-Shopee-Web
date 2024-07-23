@@ -75,9 +75,7 @@ export class UserLoginpageComponent {
     this.userService.login(this.loginDTO).subscribe({
       next: (apiResponse: ApiResponse) => {
         debugger
-        const { token } = apiResponse.data.token;
-
-        this.userService.getUserDetail(token).subscribe({
+        this.userService.getUserDetail(apiResponse.data.token).subscribe({
           next: (apiResponse2: ApiResponse) => {
             debugger
 
@@ -89,13 +87,18 @@ export class UserLoginpageComponent {
             // ---------------------------------------------------------
             // THIS ONE IS FOR NAVIGATE DIFFERENT ROLE TO DIFFERENT PAGE
             // ---------------------------------------------------------
-            this.router.navigate(['']);
+            this.router.navigate(['/user/account/profile']);
           },
-          complete: () => { },
+
+          complete: () => {
+            debugger
+          },
+
           error: (error: HttpErrorResponse) => {
+            debugger
             console.log(error?.error?.message ?? '');
           }
-        })
+        });
       }
     })
   }

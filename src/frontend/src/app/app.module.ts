@@ -28,6 +28,8 @@ import { UserAccountProfileComponent } from './components/user-account/user-acco
 import { SellerNavbarComponent } from './components/seller-navbar/seller-navbar.component';
 import { SellerHomepageComponent } from './components/seller-homepage/seller-homepage.component';
 import { CategoryPageComponent } from './components/category-page/category-page.component';
+import { UserRoutingModule } from './components/user-account/user-routing.module';
+import { UserAccountModule } from './components/user-account/user-account.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,6 @@ import { CategoryPageComponent } from './components/category-page/category-page.
     ShopeeMallComponent,
     SuggestionComponent,
     UserAccountComponent,
-    UserAccountProfileComponent,
     SellerNavbarComponent,
     SellerHomepageComponent,
     CategoryPageComponent,
@@ -58,7 +59,11 @@ import { CategoryPageComponent } from './components/category-page/category-page.
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    SwiperModule
+    SwiperModule,
+    UserAccountModule
+  ],
+  exports: [
+    NavbarComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
@@ -67,6 +72,6 @@ import { CategoryPageComponent } from './components/category-page/category-page.
   providers: [
     UserService
   ],
-  bootstrap: [CategoryPageComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
