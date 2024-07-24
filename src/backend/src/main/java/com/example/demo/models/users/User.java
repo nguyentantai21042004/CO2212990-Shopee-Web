@@ -49,6 +49,8 @@ public class User extends BaseEntity implements UserDetails {
     @NotBlank(message = "Phone number is required")
     private String phoneNumber;
 
+    private String gender;
+
     private LocalDateTime dateOfBirth;
 
     private boolean isActive;

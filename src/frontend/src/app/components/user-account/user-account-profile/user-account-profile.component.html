@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <div class="user-account-page">
     <div class="user-container container">
 
@@ -81,7 +83,7 @@
                             <label for="username" class="label">Tên đăng
                                 nhập</label>
                             <input type="text" id="username"
-                                placeholder="i52qfld6w6">
+                                placeholder={{this.userDetail?.username}}>
                             <div class="small-warning">Tên Đăng nhập chỉ có thể
                                 thay đổi một lần.
                             </div>
@@ -91,8 +93,8 @@
 
                         <div class="form-group">
                             <label for="name" class="label">Tên</label>
-                            <input type="text" id="username"
-                                placeholder="i52qfld6w6">
+                            <input type="text" id="fullName"
+                                placeholder={{this.userDetail?.fullName}}>
                         </div>
 
                         <div class="y-space" style="height: 5px;"></div>
@@ -102,8 +104,8 @@
                             <!-- <div class="link-action">
                                 <a href="#">Thêm</a>
                             </div> -->
-                            <input type="text" id="username"
-                                placeholder="i52qfld6w6">
+                            <input type="text" id="email"
+                                placeholder={{this.userDetail?.email}}>
                         </div>
 
                         <div class="y-space" style="height: 5px;"></div>
@@ -111,8 +113,8 @@
                         <div class="form-group">
                             <label for="phone" class="label">Số điện
                                 thoại</label>
-                            <input type="text" id="username"
-                                placeholder="i52qfld6w6">
+                            <input type="text" id="phoneNumber"
+                                placeholder={{this.userDetail?.phoneNumber}}>
                         </div>
 
                         <div class="form-group">
@@ -145,17 +147,23 @@
                                 sinh</label>
                             <div class="dob-select">
                                 <select id="day" class="dob-dropdown">
+                                    <option value={{this.userDetail?.createdAt}}
+                                        disabled>{{this.userDetail?.createdAt}}</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                 </select>
                                 <select id="month" class="dob-dropdown">
+                                    <option value={{this.userDetail?.createdAt}}
+                                        disabled>{{this.userDetail?.createdAt}}</option>
                                     <option value="1">Tháng 1</option>
                                     <option value="2">Tháng 2</option>
                                     <option value="3">Tháng 3</option>
                                     <!-- Add more month options here -->
                                 </select>
                                 <select id="year" class="dob-dropdown">
+                                    <option value={{this.userDetail?.createdAt}}
+                                        disabled>{{this.userDetail?.createdAt}}</option>
                                     <option value="2022">2022</option>
                                     <option value="2023">2023</option>
                                     <option value="2024">2024</option>
@@ -186,7 +194,7 @@
     </div>
 </div>
 
-<!-- <app-footer></app-footer> -->
+<app-footer></app-footer>
 
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"

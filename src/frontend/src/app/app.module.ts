@@ -23,13 +23,10 @@ import { FlashSaleComponent } from './components/homepage/flash-sale/flash-sale.
 import { BannerComponent } from './components/homepage/banner/banner.component';
 import { ShopeeMallComponent } from './components/homepage/shopee-mall/shopee-mall.component';
 import { SuggestionComponent } from './components/homepage/suggestion/suggestion.component';
-import { UserAccountComponent } from './components/user-account/user-account.component';
 import { UserAccountProfileComponent } from './components/user-account/user-account-profile/user-account-profile.component';
 import { SellerNavbarComponent } from './components/seller-navbar/seller-navbar.component';
 import { SellerHomepageComponent } from './components/seller-homepage/seller-homepage.component';
 import { CategoryPageComponent } from './components/category-page/category-page.component';
-import { UserRoutingModule } from './components/user-account/user-routing.module';
-import { UserAccountModule } from './components/user-account/user-account.module';
 
 @NgModule({
   declarations: [
@@ -49,10 +46,10 @@ import { UserAccountModule } from './components/user-account/user-account.module
     BannerComponent,
     ShopeeMallComponent,
     SuggestionComponent,
-    UserAccountComponent,
     SellerNavbarComponent,
     SellerHomepageComponent,
     CategoryPageComponent,
+    UserAccountProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +57,6 @@ import { UserAccountModule } from './components/user-account/user-account.module
     AppRoutingModule,
     FormsModule,
     SwiperModule,
-    UserAccountModule
   ],
   exports: [
     NavbarComponent,

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LoginDTO } from 'src/app/dtos/login.dtos';
 import { ApiResponse } from 'src/app/responses/api.response';
 import { UserResponse } from 'src/app/responses/user.response';
+import { TokenService } from 'src/app/services/token.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -31,7 +32,7 @@ export class UserLoginpageComponent {
     roleName: 'USER'
   }
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService, private tokenService: TokenService) { }
 
   isValidPhoneNumber(phone: string): boolean {
     const phoneRegex = /^(0|\+84)(3|5|7|8|9)\d{8}$/;
@@ -74,32 +75,54 @@ export class UserLoginpageComponent {
 
     this.userService.login(this.loginDTO).subscribe({
       next: (apiResponse: ApiResponse) => {
-        debugger
-        this.userService.getUserDetail(apiResponse.data.token).subscribe({
-          next: (apiResponse2: ApiResponse) => {
-            debugger
+        console.log('Login successful:', apiResponse);
+        const token = apiResponse?.data.token ? apiResponse?.data.token : '';
 
-            this.userResponse = {
-              ...apiResponse2.data
-            };
-            this.userService.saveUserResponseToLocalStorage(this.userResponse);
-
-            // ---------------------------------------------------------
-            // THIS ONE IS FOR NAVIGATE DIFFERENT ROLE TO DIFFERENT PAGE
-            // ---------------------------------------------------------
-            this.router.navigate(['/user/account/profile']);
-          },
-
-          complete: () => {
-            debugger
-          },
-
-          error: (error: HttpErrorResponse) => {
-            debugger
-            console.log(error?.error?.message ?? '');
-          }
-        });
+        this.tokenService.setToken(token);
+        this.getUserDetail();
+      },
+      complete: () => {
+        this.router.navigate(['/user/account/profile']);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Login error:', error);
       }
-    })
+    });
+  }
+
+
+  getUserDetail() {
+    const token = this.tokenService.getToken();
+
+    this.userService.getUserDetail(token).subscribe({
+      next: (apiResponse: ApiResponse) => {
+        console.log('User detail fetched successfully:', apiResponse);
+
+        this.userResponse = {
+          ...apiResponse.data,
+        };
+        this.userService.saveUserResponseToLocalStorage(this.userResponse);
+
+        console.log('Token set:', token);
+      },
+      complete: () => {
+        console.log('Get user detail request completed');
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error fetching user detail:', error);
+      }
+    });
+  }
+
+  arrayToDate(dateArray: number[]): Date {
+    return new Date(
+      dateArray[0],
+      dateArray[1] - 1,
+      dateArray[2],
+      dateArray[3],
+      dateArray[4],
+      dateArray[5],
+      Math.floor(dateArray[6] / 1e6)
+    );
   }
 }
